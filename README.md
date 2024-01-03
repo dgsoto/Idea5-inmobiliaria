@@ -1,2 +1,2 @@
 # Idea5-inmobiliaria
-This a project for idea 5 related to Inmobiliaria
+This is a project for Idea 5 related to Inmobiliaria
