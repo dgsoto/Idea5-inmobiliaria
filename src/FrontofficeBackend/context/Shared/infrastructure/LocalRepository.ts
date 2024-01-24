@@ -1,5 +1,5 @@
-import type { BaseEntity } from '../BaseEntity'
-import type { IRepository } from '../IRepository'
+import type { BaseEntity } from '../domain/BaseEntity'
+import type { IRepository } from '../domain/IRepository'
 
 export class LocalRepository<T extends BaseEntity> implements IRepository<T> {
   protected entities: T[] = []

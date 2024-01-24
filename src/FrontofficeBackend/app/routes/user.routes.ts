@@ -1,19 +1,11 @@
 import { Router } from 'express'
 import { createUserController } from '../controllers/user/createUserController'
+import { CreateUserValidator } from '../../context/User/application/create/CreateUserValidator'
+import { validateReqSchema } from '../middlewares/validationHandleMiddleware'
 
 const router = Router()
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-router.put('/:id', async (req, res, next) => {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises, no-async-promise-executor
-  await new Promise<void>(async (resolve, reject) => {
-    try {
-      await createUserController(req, res, next)
-      resolve()
-    } catch (error) {
-      reject(error)
-    }
-  })
-})
+router.put('/:id', CreateUserValidator, validateReqSchema, createUserController)
 
 export default router
