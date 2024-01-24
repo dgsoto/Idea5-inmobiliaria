@@ -11,7 +11,7 @@ export class LocalRepository<T extends BaseEntity> implements IRepository<T> {
 
   async update(entity: T): Promise<void> {
     const index = this.entities.findIndex(e => e.id === entity.id)
-    if (index !== undefined) {
+    if (index !== -1) {
       this.entities[index] = entity
     }
   }
