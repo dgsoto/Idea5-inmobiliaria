@@ -1,14 +1,18 @@
 import { Router, type Request, type Response, type NextFunction } from 'express'
-import { UserAlreadyExistError } from '../../context/User/domain/errors/UserAlreadyExistError'
+import { UserEmailAlreadyExistError } from '../../context/User/domain/errors/UserEmailAlreadyExistError'
 import userRoutes from './user.routes'
+import { UseIdAlreadyExistError } from '../../context/User/domain/errors/UseIdAlreadyExistError'
+import { ResponseBase } from '../../context/Shared/application/ResponseBase'
 
 const router = Router()
 
 router.use('/users', userRoutes)
 
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  if (err instanceof UserAlreadyExistError) {
-    res.status(400).json({ message: 'User already has ben registred' })
+  if (err instanceof UserEmailAlreadyExistError) {
+    res.status(400).json(new ResponseBase<void>(false, 'User with this email already has been registred'))
+  } else if (err instanceof UseIdAlreadyExistError) {
+    res.status(400).json(new ResponseBase(false, 'User with this Id already has been registred'))
   } else {
     next(err)
   }
