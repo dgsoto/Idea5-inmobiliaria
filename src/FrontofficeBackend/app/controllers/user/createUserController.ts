@@ -3,11 +3,20 @@ import { CreateUserUseCase } from '../../../context/User/application/create/Crea
 import { User } from '../../../context/User/domain/User'
 import { UserRepository } from '../../../context/User/infrastructure/UserRepository'
 
-export const createUserController = async (req: Request, res: Response, next: NextFunction, userRepository: UserRepository): Promise<void> => {
+type CreatePutRequest = Request & {
+  body: {
+    id: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string
+  }
+}
+
+export const createUserController = async (req: CreatePutRequest, res: Response, next: NextFunction, userRepository: UserRepository): Promise<void> => {
   const { id, firstname, lastname, email, password } = req.body
   const _createUserUsercase = new CreateUserUseCase(userRepository)
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const user = new User(id, firstname, lastname, email, password)
 
   try {
