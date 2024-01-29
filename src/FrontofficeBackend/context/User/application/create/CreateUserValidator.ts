@@ -1,12 +1,7 @@
-import { body } from 'express-validator'
+import { body } from 'express-validator';
 
 export const CreateUserValidator = [
-  body('id')
-    .exists()
-    .withMessage('Id is required')
-    .trim()
-    .isUUID()
-    .withMessage('Id must be a Uuid'),
+  body('id').exists().withMessage('Id is required').trim().isUUID().withMessage('Id must be a Uuid'),
 
   body('firstname')
     .exists()
@@ -40,5 +35,5 @@ export const CreateUserValidator = [
     .isString()
     .withMessage('Password must be a string')
     .isLength({ min: 8, max: 100 })
-    .withMessage('Password must be at least 8 characters')
-]
+    .withMessage('Password must be at least 8 characters'),
+];

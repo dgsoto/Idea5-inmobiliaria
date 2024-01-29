@@ -1,5 +1,3 @@
-import { createUserController } from './user/createUserController'
+import { createUserController } from './user/createUserController';
 
-export {
-  createUserController
-}
+export { createUserController };
