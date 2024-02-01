@@ -1,14 +1,15 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { createUserController } from '../controllers/user/createUserController';
 import { CreateUserValidator } from '../../context/User/application/create/CreateUserValidator';
 import { validateReqSchema } from '../middlewares/validationHandleMiddleware';
 import { userRepository } from '../services';
+import { CreateUserController } from '../controllers';
+import { CreateUserUseCase } from '../../context/User/application/create/CreateUserUseCase';
 
 const router = Router();
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
+const controller = new CreateUserController(new CreateUserUseCase(userRepository));
 router.put('/:id', CreateUserValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
-  await createUserController(req, res, next, userRepository);
+  await controller.run(req, res, next);
 });
 
 export default router;

@@ -1,11 +1,17 @@
-import { type IUserRepository } from '../../domain/IUserRepository';
-import { type User } from '../../domain/User';
+import { IUserRepository } from '../../domain/IUserRepository';
 import { UseIdAlreadyExistError } from '../../domain/errors/UseIdAlreadyExistError';
 import { UserEmailAlreadyExistError } from '../../domain/errors/UserEmailAlreadyExistError';
 import { ExistUserByEmail } from '../../domain/services/ExistUserByEmail';
 import { ExistUserById } from '../../domain/services/ExistUserById';
 import { hashPassword } from '../../infrastructure/security/hashPassword';
 
+interface ICreateUserRequest {
+  id: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+}
 export class CreateUserUseCase {
   private readonly _repository: IUserRepository;
   private readonly checkByEmail: ExistUserByEmail;
@@ -17,15 +23,15 @@ export class CreateUserUseCase {
     this.checkById = new ExistUserById(this._repository);
   }
 
-  async run(user: User): Promise<void> {
-    const checkUserByEmail = await this.checkByEmail.check(user.email);
+  async run(req: ICreateUserRequest): Promise<void> {
+    const checkUserByEmail = await this.checkByEmail.check(req.email);
     if (checkUserByEmail) throw new UserEmailAlreadyExistError();
 
-    const checkUserById = await this.checkById.check(user.id);
+    const checkUserById = await this.checkById.check(req.id);
     if (checkUserById) throw new UseIdAlreadyExistError();
 
-    user.password = await hashPassword(user.password);
+    req.password = await hashPassword(req.password);
 
-    await this._repository.create(user);
+    await this._repository.create(req);
   }
 }

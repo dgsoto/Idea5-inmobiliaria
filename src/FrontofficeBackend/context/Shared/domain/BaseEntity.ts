@@ -1,6 +1,6 @@
 export abstract class BaseEntity {
   id: string;
-  createdAt: Date;
+  createdAt?: Date;
   modifiedAt?: Date;
 
   constructor(id: string) {
