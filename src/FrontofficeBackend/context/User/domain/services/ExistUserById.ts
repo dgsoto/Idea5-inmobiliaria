@@ -1,9 +1,12 @@
+import { inject, injectable } from 'tsyringe';
 import type { IUserRepository } from '../IUserRepository';
+import 'reflect-metadata';
 
+@injectable()
 export class ExistUserById {
   private readonly _repository: IUserRepository;
 
-  constructor(repository: IUserRepository) {
+  constructor(@inject('IUserRepository') repository: IUserRepository) {
     this._repository = repository;
   }
 

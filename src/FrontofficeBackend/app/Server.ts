@@ -13,7 +13,6 @@ export class Server {
     this.express = express();
     this.express.use(json());
     this.express.use(urlencoded({ extended: true }));
-
     this.express.use('/api', router);
   }
 

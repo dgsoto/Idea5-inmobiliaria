@@ -18,9 +18,10 @@ router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-router.use((err: Error, req: Request, res: Response) => {
+router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.log(err);
-  res.status(500).json({ error: err });
+  res.status(500).end();
+  next();
 });
 
 export default router;
