@@ -6,7 +6,7 @@ export class LocalRepository<T extends BaseEntity> implements IRepository<T> {
 
   async create(entity: T): Promise<void> {
     this.entities.push(entity);
-    console.log(this.entities);
+    // console.log(this.entities);
   }
 
   async update(entity: T): Promise<void> {

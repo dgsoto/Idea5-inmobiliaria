@@ -6,6 +6,9 @@ import { userRepository } from '../services';
 
 const router = Router();
 
+router.get('/', (req, res) => {
+  return res.status(200).send('lista de usuarios');
+});
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 router.put('/:id', CreateUserValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
   await createUserController(req, res, next, userRepository);
