@@ -1,39 +1,49 @@
 import { body } from 'express-validator';
 
 export const CreateUserValidator = [
-  body('id').exists().withMessage('Id is required').trim().isUUID().withMessage('Id must be a Uuid'),
+  body('id').exists().withMessage("The 'id' field is required").isUUID().withMessage("The 'id' field must be a valid 'Uuid'").trim().escape(),
 
   body('firstname')
     .exists()
-    .withMessage('First name is required')
-    .trim()
+    .withMessage("The 'firstname' field is required")
+
     .isString()
-    .withMessage('First name must be a string')
+    .withMessage("The 'firstname' field must be a valid string")
+    .trim()
+    .escape()
     .isLength({ min: 2, max: 50 })
-    .withMessage('First name must be between 2 and 50 characters'),
+    .withMessage("The 'firstname' field must be between 2 and 50 characters"),
 
   body('lastname')
     .exists()
-    .withMessage('Last name is required')
-    .trim()
+    .withMessage("The 'lastname' field is required")
+
     .isString()
-    .withMessage('Last name must be a string')
+    .withMessage("The 'lastname' field must be a valid string")
+    .trim()
+    .escape()
     .isLength({ min: 2, max: 50 })
-    .withMessage('Last name must be between 2 and 50 characters'),
+    .withMessage("The 'lastname' field must be between 2 and 50 characters"),
 
   body('email')
     .exists()
-    .withMessage('Email is required')
+    .withMessage("The 'email' field is required")
+
     .isString()
-    .withMessage('Email must be a string')
+    .withMessage("The 'email' field must be a valid string")
+    .trim()
+    .escape()
     .isEmail()
-    .withMessage('Email must be valid'),
+    .withMessage("The 'email' field must be valid"),
 
   body('password')
     .exists()
-    .withMessage('Password is required')
+    .withMessage("The 'password' field is required")
+
     .isString()
-    .withMessage('Password must be a string')
+    .withMessage("The 'password' field must be a valid string")
+    .trim()
+    .escape()
     .isLength({ min: 8, max: 100 })
-    .withMessage('Password must be at least 8 characters'),
+    .withMessage("The 'password' field must be between 8 and 100 characters"),
 ];
