@@ -30,7 +30,7 @@ export class CreateUserController implements IController {
 
       const result = await this._createUserUseCase.run({ id, firstname, lastname, email, password });
 
-      const response = new ResponseBase<void>(true, '', result);
+      const response = new ResponseBase<void>(true, httpStatus.CREATED, httpStatus[201], undefined, result);
 
       res.status(httpStatus.CREATED).send(response);
     } catch (error) {

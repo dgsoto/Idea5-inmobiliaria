@@ -1,25 +1,17 @@
 export class ResponseBase<T> {
   succesed: boolean;
+  code: number;
+  status_code: string;
   message?: string;
-  error?: Error;
+  errors?: string[];
   data?: T;
 
-  constructor(succesed: boolean, message: string = '', data?: T, error?: Error) {
+  constructor(succesed: boolean, code: number, status_code: string, message?: string, data?: T, errors?: string[]) {
     this.succesed = succesed;
-    this.message = message;
-    this.error = error;
-    this.data = data;
-  }
-}
-
-export class Error {
-  code: string;
-  status_code: string;
-  messages: string[];
-
-  constructor(code: string, status_code: string, messages: string[]) {
     this.code = code;
     this.status_code = status_code;
-    this.messages = messages;
+    this.message = message;
+    this.errors = errors;
+    this.data = data;
   }
 }

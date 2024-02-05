@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ValidationError, validationResult } from 'express-validator';
 import httpStatus from 'http-status';
-import { Error, ResponseBase } from '../../context/Shared/application/ResponseBase';
+import { ResponseBase } from '../../context/Shared/application/ResponseBase';
 
 export function validateReqSchema(req: Request, res: Response, next: NextFunction): void {
   const validationsErrors = validationResult(req);
@@ -13,6 +13,6 @@ export function validateReqSchema(req: Request, res: Response, next: NextFunctio
 
   const errors = validationsErrors.array().map((err: ValidationError) => err.msg);
 
-  const response = new ResponseBase(false, 'Error validating registration data', undefined, new Error('422', 'UNPROCESSABLE_ENTITY', errors));
+  const response = new ResponseBase(false, httpStatus.UNPROCESSABLE_ENTITY, httpStatus[422], 'Error validating registration data', undefined, errors);
   res.status(httpStatus.UNPROCESSABLE_ENTITY).json(response);
 }

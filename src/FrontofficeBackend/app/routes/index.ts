@@ -2,7 +2,8 @@ import { Router, type Request, type Response, type NextFunction } from 'express'
 import { UserEmailAlreadyExistError } from '../../context/User/domain/errors/UserEmailAlreadyExistError';
 import userRoutes from './user.routes';
 import { UseIdAlreadyExistError } from '../../context/User/domain/errors/UseIdAlreadyExistError';
-import { ResponseBase, Error } from '../../context/Shared/application/ResponseBase';
+import { ResponseBase } from '../../context/Shared/application/ResponseBase';
+import httpStatus from 'http-status';
 
 const router = Router();
 
@@ -13,23 +14,17 @@ router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res
       .status(400)
       .json(
-        new ResponseBase<void>(
-          false,
-          'Error registering new User',
-          undefined,
-          new Error('400', 'BAD_REQUEST', ["User with this 'email' already has been registred"]),
-        ),
+        new ResponseBase<void>(false, httpStatus.BAD_REQUEST, httpStatus[400], 'Error registering new User', undefined, [
+          "User with this 'email' already has been registred",
+        ]),
       );
   } else if (err instanceof UseIdAlreadyExistError) {
     res
       .status(400)
       .json(
-        new ResponseBase<void>(
-          false,
-          'Error registering new User',
-          undefined,
-          new Error('400', 'BAD_REQUEST', ["User with this 'id' already has been registred"]),
-        ),
+        new ResponseBase<void>(false, httpStatus.BAD_REQUEST, httpStatus[400], 'Error registering new User', undefined, [
+          "User with this 'id' already has been registred",
+        ]),
       );
   } else {
     next(err);
