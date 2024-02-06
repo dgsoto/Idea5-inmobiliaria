@@ -12,7 +12,9 @@ export class AuthRepository implements IAuthRepository {
     if (!findUser) return { status: 404, message: 'User not found.' };
     const isMatched = await bcrypt.compare(auth.password, findUser?.password || '');
     if (!isMatched) return { status: 401, message: 'Wrong password.' };
-    const token = jwt.sign({ id: findUser.id, name: findUser.name, email: findUser.email }, process.env.SECRET_KEY ?? '');
-    return { status: 200, user: { email: findUser.email, name: findUser.name }, token };
+    const token = jwt.sign({ id: findUser.id, name: findUser.firstName, email: findUser.email }, process.env.SECRET_KEY ?? '', {
+      expiresIn: process.env.TOKEN_DURATION ?? '1d',
+    });
+    return { status: 200, user: { email: findUser.email, name: findUser.firstName }, token };
   }
 }
