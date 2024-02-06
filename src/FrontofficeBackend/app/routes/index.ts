@@ -1,7 +1,7 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
 import { UserEmailAlreadyExistError } from '../../context/User/domain/errors/UserEmailAlreadyExistError';
 import userRoutes from './user.routes';
-import authRoutes from './auth.routes';
+import authRoutes from '../../context/auth/infraestructure/routes/auth.routes';
 import { UseIdAlreadyExistError } from '../../context/User/domain/errors/UseIdAlreadyExistError';
 import { ResponseBase } from '../../context/Shared/application/ResponseBase';
 

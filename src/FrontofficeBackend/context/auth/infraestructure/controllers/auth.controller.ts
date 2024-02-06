@@ -26,14 +26,4 @@ export class AuthController {
       next(error);
     }
   };
-
-  //   checkAdminAuth = async (req, res, next) => {
-  //     const id = req.userId;
-  //     try {
-  //       const data = await this.#authService.checkAdminAuth(id);
-  //       res.status(data.status).json(data);
-  //     } catch (error) {
-  //       next(error);
-  //     }
-  //   };
 }

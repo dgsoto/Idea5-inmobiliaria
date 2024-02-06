@@ -1,4 +1,5 @@
-import { Auth, SignInProps } from '../domain/auth';
+import { Auth } from '../domain/auth';
+import { ErrorProps, SignInProps } from '../domain/interfaces/auth.interface';
 import { IAuthRepository } from '../domain/interfaces/auth.interface';
 
 export class AuthService {
@@ -7,7 +8,7 @@ export class AuthService {
     this.authRepository = authRepository;
   }
 
-  public async signIn(email: string, password: string): Promise<SignInProps> {
+  public async signIn(email: string, password: string): Promise<SignInProps | ErrorProps> {
     const auth: Auth = new Auth(email, password);
     return await this.authRepository.signIn(auth);
   }

@@ -7,9 +7,3 @@ export class Auth {
     this.password = password;
   }
 }
-
-export interface SignInProps {
-  status: number;
-  user: { email: string; name: string };
-  token: string;
-}
