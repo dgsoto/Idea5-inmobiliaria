@@ -30,8 +30,12 @@ Given('I send a PUT request to {string} with body:', (route: string, body: strin
   }
 });
 
-Then('the response should be empty', () => {
-  assert.deepStrictEqual(_response. , {});
+Then('the response should be', () => {
+  assert.deepStrictEqual(_response.body, {
+    succesed: true,
+    code: 201,
+    status_code: 'Created',
+  });
 });
 
 AfterAll(async () => {

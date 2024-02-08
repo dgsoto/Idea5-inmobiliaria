@@ -16,7 +16,7 @@ Feature: Register an new user
       }
       """
     Then the response status code should be 201
-    And the response should be empty
+    And the response should be
 
   Scenario: An invalid non existing user
     Given I send a PUT request to "/api/users/d7cd6582-7010-48e3-aab4-c1b69d38c511" with body:
