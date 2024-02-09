@@ -1,12 +1,13 @@
 import { body } from 'express-validator';
 
+const emailRegex = /^[a-zA-Z0-9._-]+@(?!.*\.\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export const CreateUserValidator = [
   body('id').exists().withMessage("The 'id' field is required").isUUID().withMessage("The 'id' field must be a valid 'Uuid'").trim().escape(),
 
   body('firstname')
     .exists()
     .withMessage("The 'firstname' field is required")
-
     .isString()
     .withMessage("The 'firstname' field must be a valid string")
     .trim()
@@ -17,7 +18,6 @@ export const CreateUserValidator = [
   body('lastname')
     .exists()
     .withMessage("The 'lastname' field is required")
-
     .isString()
     .withMessage("The 'lastname' field must be a valid string")
     .trim()
@@ -28,18 +28,18 @@ export const CreateUserValidator = [
   body('email')
     .exists()
     .withMessage("The 'email' field is required")
-
     .isString()
     .withMessage("The 'email' field must be a valid string")
     .trim()
     .escape()
     .isEmail()
-    .withMessage("The 'email' field must be valid"),
+    .withMessage("The 'email' field must be valid")
+    .matches(emailRegex)
+    .withMessage("The 'email' field has invalid email format"),
 
   body('password')
     .exists()
     .withMessage("The 'password' field is required")
-
     .isString()
     .withMessage("The 'password' field must be a valid string")
     .trim()
