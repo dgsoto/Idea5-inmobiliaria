@@ -1,8 +1,8 @@
 import { Router, type Request, type Response, type NextFunction } from 'express';
-import { UserEmailAlreadyExistError } from '../../context/User/domain/errors/UserEmailAlreadyExistError';
-import userRoutes from './user.routes';
-import { UseIdAlreadyExistError } from '../../context/User/domain/errors/UseIdAlreadyExistError';
-import { ResponseBase } from '../../context/Shared/application/ResponseBase';
+import { UserEmailAlreadyExistError } from '../modules/User/domain/errors/UserEmailAlreadyExistError';
+import userRoutes from '../modules/User/infrastructure/api/user.routes';
+import { UseIdAlreadyExistError } from '../modules/User/domain/errors/UseIdAlreadyExistError';
+import { ResponseBase } from '../modules/Shared/application/ResponseBase';
 import httpStatus from 'http-status';
 
 const router = Router();

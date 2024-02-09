@@ -1,5 +1,5 @@
-import { User } from '../domain/User';
-import type { IUserRepository } from '../domain/IUserRepository';
+import { User } from '../../domain/User';
+import type { IUserRepository } from '../../domain/IUserRepository';
 import { PrismaClient } from '@prisma/client';
 import 'reflect-metadata';
 import { injectable } from 'tsyringe';

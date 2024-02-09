@@ -6,6 +6,7 @@
   "scripts": {
     "dev:frontoffice:backend": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/FrontofficeBackend/app/start.ts",
     "test:frontofficeBackend:features": "NODE_ENV=test cucumber-js -p frontofficeBackend",
+    "prisma:generate":  "cd src/FrontofficeBackend/modules/shared/infrastructure/persistence && npx prisma generate",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
   },

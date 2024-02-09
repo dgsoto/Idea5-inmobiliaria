@@ -1,11 +1,11 @@
-import { UserRepository } from '../context/User/infrastructure/UserRepository';
-import { CreateUserUseCase } from '../context/User/application/create/CreateUserUseCase';
+import { CreateUserUseCase } from '../modules/User/application/create/CreateUserUseCase';
 import { container } from 'tsyringe';
-import { IUserRepository } from '../context/User/domain/IUserRepository';
-import { ExistUserByEmail } from '../context/User/domain/services/ExistUserByEmail';
-import { ExistUserById } from '../context/User/domain/services/ExistUserById';
-import { CreateUserController } from './controllers';
-import { IController } from './controllers/IController';
+import { IUserRepository } from '../modules/User/domain/IUserRepository';
+import { ExistUserByEmail } from '../modules/User/domain/services/ExistUserByEmail';
+import { ExistUserById } from '../modules/User/domain/services/ExistUserById';
+import { IController } from '../modules/Shared/infrastructure/api/IController';
+import { UserRepository } from '../modules/User/infrastructure/persistence/UserRepository';
+import { CreateUserController } from '../modules/User/infrastructure/api/CreateUserController';
 
 container.register<IUserRepository>('IUserRepository', { useClass: UserRepository });
 container.register('ExistUserByEmail', { useClass: ExistUserByEmail });

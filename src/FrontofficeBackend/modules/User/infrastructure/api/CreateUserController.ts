@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { CreateUserUseCase } from '../../../context/User/application/create/CreateUserUseCase';
-import { IController } from '../IController';
+import { IController } from '../../../Shared/infrastructure/api/IController';
 import httpStatus from 'http-status';
-import { ResponseBase } from '../../../context/Shared/application/ResponseBase';
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
+import { CreateUserUseCase } from '../../application/create/CreateUserUseCase';
+import { ResponseBase } from '../../../../modules/Shared/application/ResponseBase';
 
 type CreatePutRequest = Request & {
   body: {

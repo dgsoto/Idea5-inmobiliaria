@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { CreateUserValidator } from '../../context/User/application/create/CreateUserValidator';
-import { validateReqSchema } from '../middlewares/validationHandleMiddleware';
-import { container } from '../container';
-import { IController } from '../controllers/IController';
+import { validateReqSchema } from '../../../Shared/infrastructure/api/validationHandleMiddleware';
+import { container } from '../../../../app/container';
+import { IController } from '../../../Shared/infrastructure/api/IController';
+import { CreateUserValidator } from '../../application/create/CreateUserValidator';
+import 'reflect-metadata';
 
 const router = Router();
 
