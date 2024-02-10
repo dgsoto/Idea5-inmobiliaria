@@ -8,18 +8,21 @@ export class User extends BaseEntity {
   email: string;
   password: string;
 
-  constructor(id: string, firstname: string, lastname: string, email: string, password: string) {
+  constructor(id: string, firstname: string, lastname: string, email: string, hashedPassword: string) {
     super(id);
     this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
     this.email = email;
-    this.password = password;
-    this.encryptPassword(password);
+    this.password = hashedPassword;
   }
 
-  async encryptPassword(password: string): Promise<void> {
+  static async create(id: string, firstname: string, lastname: string, email: string, password: string): Promise<User> {
+    //console.log(password);
     const hashedPassword = await hashPassword(password);
-    this.password = hashedPassword;
+    //console.log(hashedPassword);
+    const u = new User(id, firstname, lastname, email, hashedPassword);
+    //console.log(u.password);
+    return u;
   }
 }

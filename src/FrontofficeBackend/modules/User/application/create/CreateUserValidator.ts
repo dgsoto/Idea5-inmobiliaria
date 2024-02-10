@@ -1,6 +1,6 @@
 import { body } from 'express-validator';
 
-const emailRegex = /^[a-zA-Z0-9._-]+@(?!.*\.\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const emailRegex = /^[a-zA-Z0-9._-]{3,}@(?!.*\.\.)[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$/;
 
 export const CreateUserValidator = [
   body('id').exists().withMessage("The 'id' field is required").isUUID().withMessage("The 'id' field must be a valid 'Uuid'").trim().escape(),

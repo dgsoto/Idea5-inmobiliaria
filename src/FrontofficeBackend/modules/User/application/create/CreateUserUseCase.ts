@@ -37,8 +37,7 @@ export class CreateUserUseCase {
     const checkUserById = await this.checkById.check(req.id);
     if (checkUserById) throw new UseIdAlreadyExistError();
 
-    const user = new User(req.id, req.firstname, req.lastname, req.email, req.password);
-
+    const user = await User.create(req.id, req.firstname, req.lastname, req.email, req.password);
     await this._repository.create(user);
   }
 }

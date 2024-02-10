@@ -28,11 +28,11 @@ describe('UserCreator', () => {
     const lastname = faker.person.lastName();
     const email = faker.internet.email();
     const password = faker.internet.password();
-
-    const expectedUser = new User(id, firstname, lastname, email, password);
+    //console.log(password);
+    const expectedUser = await User.create(id, firstname, lastname, email, password);
+    //console.log(expectedUser.password);
     await useCase.run({ id, firstname, lastname, email, password });
 
     await repository.assertSaveHaveBeenCalledWith(expectedUser);
-    //console.log(expectedUser);
   });
 });
