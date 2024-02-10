@@ -4,8 +4,8 @@ import { UseIdAlreadyExistError } from '../../domain/errors/UseIdAlreadyExistErr
 import { UserEmailAlreadyExistError } from '../../domain/errors/UserEmailAlreadyExistError';
 import { ExistUserByEmail } from '../../domain/services/ExistUserByEmail';
 import { ExistUserById } from '../../domain/services/ExistUserById';
-import { hashPassword } from '../../infrastructure/security/hashPassword';
 import 'reflect-metadata';
+import { User } from '../../domain/User';
 
 interface ICreateUserRequest {
   id: string;
@@ -37,8 +37,8 @@ export class CreateUserUseCase {
     const checkUserById = await this.checkById.check(req.id);
     if (checkUserById) throw new UseIdAlreadyExistError();
 
-    req.password = await hashPassword(req.password);
+    const user = new User(req.id, req.firstname, req.lastname, req.email, req.password);
 
-    await this._repository.create(req);
+    await this._repository.create(user);
   }
 }
