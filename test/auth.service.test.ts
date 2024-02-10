@@ -11,7 +11,7 @@ describe('Auth Service', () => {
   });
 
   beforeEach(() => {
-    let authRepository = new AuthRepository();
+    const authRepository = new AuthRepository();
     authService = new AuthService(authRepository);
   });
 
