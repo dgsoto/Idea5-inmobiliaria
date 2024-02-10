@@ -18,11 +18,7 @@ export class User extends BaseEntity {
   }
 
   static async create(id: string, firstname: string, lastname: string, email: string, password: string): Promise<User> {
-    //console.log(password);
     const hashedPassword = await hashPassword(password);
-    //console.log(hashedPassword);
-    const u = new User(id, firstname, lastname, email, hashedPassword);
-    //console.log(u.password);
-    return u;
+    return new User(id, firstname, lastname, email, hashedPassword);
   }
 }
