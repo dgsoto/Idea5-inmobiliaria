@@ -1,4 +1,4 @@
-import { inject, injectable } from 'tsyringe';
+import { container, inject, injectable } from 'tsyringe';
 import { IUserRepository } from '../../domain/IUserRepository';
 import { UseIdAlreadyExistError } from '../../domain/errors/UseIdAlreadyExistError';
 import { UserEmailAlreadyExistError } from '../../domain/errors/UserEmailAlreadyExistError';
@@ -6,6 +6,12 @@ import { ExistUserByEmail } from '../../domain/services/ExistUserByEmail';
 import { ExistUserById } from '../../domain/services/ExistUserById';
 import 'reflect-metadata';
 import { User } from '../../domain/User';
+import { UserId } from '../../domain/UserId';
+import { UserFirstname } from '../../domain/UserFirstname';
+import { UserLastname } from '../../domain/UserLastname';
+import { UserEmail } from '../../domain/UserEmail';
+import { UserPassword } from '../../domain/UserPassword';
+import { UserPhone } from '../../domain/UserPhone';
 
 interface ICreateUserRequest {
   id: string;
@@ -13,6 +19,7 @@ interface ICreateUserRequest {
   lastname: string;
   email: string;
   password: string;
+  phone: string;
 }
 
 @injectable()
@@ -37,7 +44,14 @@ export class CreateUserUseCase {
     const checkUserById = await this.checkById.check(req.id);
     if (checkUserById) throw new UseIdAlreadyExistError();
 
-    const user = await User.create(req.id, req.firstname, req.lastname, req.email, req.password);
+    const user = await User.create(
+      new UserId(req.id),
+      new UserFirstname(req.firstname),
+      new UserLastname(req.lastname),
+      new UserEmail(req.email),
+      new UserPassword(req.password, container.resolve('HashService')),
+      new UserPhone(req.phone),
+    );
     await this._repository.create(user);
   }
 }

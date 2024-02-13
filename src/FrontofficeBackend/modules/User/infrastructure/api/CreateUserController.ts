@@ -13,6 +13,7 @@ type CreatePutRequest = Request & {
     lastname: string;
     email: string;
     password: string;
+    phone: string;
   };
 };
 
@@ -26,9 +27,9 @@ export class CreateUserController implements IController {
 
   public async run(req: CreatePutRequest, res: Response, next: NextFunction): Promise<void> {
     try {
-      const { id, firstname, lastname, email, password } = req.body;
+      const { id, firstname, lastname, email, password, phone } = req.body;
 
-      const result = await this._createUserUseCase.run({ id, firstname, lastname, email, password });
+      const result = await this._createUserUseCase.run({ id, firstname, lastname, email, password, phone });
 
       const response = new ResponseBase<void>(true, httpStatus.CREATED, httpStatus[201], undefined, result);
 

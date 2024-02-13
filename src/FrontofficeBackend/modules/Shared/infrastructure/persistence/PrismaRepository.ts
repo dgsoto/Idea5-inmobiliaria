@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from '@prisma/client';
 import type { IRepository } from '../../domain/IRepository';
-import type { BaseEntity } from '../../domain/BaseEntity';
+import type { BaseEntity } from '../../domain/AggregateRoot';
 
 export class PrismaRepository<T extends BaseEntity> implements IRepository<T> {
   protected prisma: PrismaClient;

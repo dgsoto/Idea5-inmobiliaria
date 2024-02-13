@@ -1,4 +1,4 @@
-import type { BaseEntity } from './BaseEntity';
+import type { BaseEntity } from './AggregateRoot';
 
 export interface IRepository<T extends BaseEntity> {
   create: (entity: T) => Promise<void>;

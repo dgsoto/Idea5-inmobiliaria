@@ -1,4 +1,4 @@
-import type { BaseEntity } from '../domain/BaseEntity';
+import type { BaseEntity } from '../domain/AggregateRoot';
 import type { IRepository } from '../domain/IRepository';
 
 export class LocalRepository<T extends BaseEntity> implements IRepository<T> {
