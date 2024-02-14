@@ -6,8 +6,8 @@ import { ExistUserById } from '../modules/User/domain/services/ExistUserById';
 import { IController } from '../modules/Shared/infrastructure/api/IController';
 import { UserRepository } from '../modules/User/infrastructure/persistence/UserRepository';
 import { CreateUserController } from '../modules/User/infrastructure/api/CreateUserController';
-import { IHashService } from 'FrontofficeBackend/modules/User/domain/services/IHashService';
-import { HashService } from 'FrontofficeBackend/modules/User/infrastructure/security/hashService';
+import { IHashService } from '../modules/User/domain/services/IHashService';
+import { HashService } from '../modules/User/infrastructure/security/HashService';
 
 container.register<IUserRepository>('IUserRepository', { useClass: UserRepository });
 container.register('ExistUserByEmail', { useClass: ExistUserByEmail });

@@ -8,6 +8,7 @@
     "test:fo:backend:features": "NODE_ENV=test cucumber-js -p frontofficeBackend",
     "test:fo:backend:unit": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles",
     "prisma:generate": "cd src/FrontofficeBackend/modules/shared/infrastructure/persistence && npx prisma generate",
+    "prisma:push": "cd src/FrontofficeBackend/modules/shared/infrastructure/persistence && npx prisma db push",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix"
   },

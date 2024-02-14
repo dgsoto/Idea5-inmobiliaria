@@ -1,5 +1,5 @@
-import { InvalidArgumentError } from 'FrontofficeBackend/modules/Shared/domain/InvalidArgumentError';
-import { StringValueObject } from 'FrontofficeBackend/modules/Shared/domain/StringValueObject';
+import { InvalidArgumentError } from '../../Shared/domain/InvalidArgumentError';
+import { StringValueObject } from '../../Shared/domain/StringValueObject';
 
 export class UserEmail extends StringValueObject {
   constructor(value: string) {

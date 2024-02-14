@@ -1,4 +1,4 @@
-import { Uuid } from 'FrontofficeBackend/modules/Shared/infrastructure/services/Uuid';
+import { Uuid } from '../../Shared/infrastructure/services/Uuid';
 
 export class UserId extends Uuid {
   constructor(value: string) {

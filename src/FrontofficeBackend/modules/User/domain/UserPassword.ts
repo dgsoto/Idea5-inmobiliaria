@@ -1,16 +1,22 @@
-import { InvalidArgumentError } from 'FrontofficeBackend/modules/Shared/domain/InvalidArgumentError';
-import { StringValueObject } from 'FrontofficeBackend/modules/Shared/domain/StringValueObject';
 import { inject } from 'tsyringe';
+import { InvalidArgumentError } from '../../Shared/domain/InvalidArgumentError';
+import { StringValueObject } from '../../Shared/domain/StringValueObject';
 import { IHashService } from './services/IHashService';
 
 export class UserPassword extends StringValueObject {
+  private hashedValue: string = '';
+
   constructor(
     value: string,
     @inject('HashService') private hashService: IHashService,
   ) {
     super(value);
     this.ensureLengthIsBetween8And100Characters(value);
-    this.generateHash();
+  }
+
+  async validate() {
+    const hashedValue = await this.hashService.hash(this.getValue());
+    this.hashedValue = hashedValue;
   }
 
   private ensureLengthIsBetween8And100Characters(value: string) {
@@ -19,9 +25,7 @@ export class UserPassword extends StringValueObject {
     }
   }
 
-  private async generateHash() {
-    const currentValue = this.getValue();
-    const hashedValue = await this.hashService.hash(currentValue);
-    this.setValue(hashedValue);
+  getHashedValue(): string {
+    return this.hashedValue;
   }
 }
