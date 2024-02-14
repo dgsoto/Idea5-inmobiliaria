@@ -28,4 +28,10 @@ export class UserPassword extends StringValueObject {
   getHashedValue(): string {
     return this.hashedValue;
   }
+
+  static async createAndHash(value: string, hashService: IHashService): Promise<UserPassword> {
+    const userPassword = new UserPassword(value, hashService);
+    await userPassword.validate();
+    return userPassword;
+  }
 }
