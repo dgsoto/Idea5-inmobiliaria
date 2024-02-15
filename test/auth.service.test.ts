@@ -1,18 +1,18 @@
-import { AuthRepository } from '../src/FrontofficeBackend/context/auth/infraestructure/auth.repository';
-import { AuthService } from '../src/FrontofficeBackend/context/auth/application/auth.service';
-import { PrismaClient } from '@prisma/client';
+//import { AuthRepository } from '../src/FrontofficeBackend/modules/auth/infraestructure/auth.repository';
+//import { AuthService } from '../src/FrontofficeBackend/modules/auth/application/auth.service';
+//import { PrismaClient } from '@prisma/client';
 
 describe('Auth Service', () => {
-  let authService: AuthService;
+  //let authService: AuthService;
 
   beforeEach(() => {
-    const db = new PrismaClient();
+    //const db = new PrismaClient();
     //create user
   });
 
   beforeEach(() => {
-    const authRepository = new AuthRepository();
-    authService = new AuthService(authRepository);
+    //const authRepository = new AuthRepository();
+    //authService = new AuthService(authRepository);
   });
 
   afterAll(() => {
