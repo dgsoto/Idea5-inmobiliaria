@@ -1,0 +1,8 @@
+node_modules/
+*.code-workspace
+dist/
+.tmp
+logs/
+css/
+.env
+.css
