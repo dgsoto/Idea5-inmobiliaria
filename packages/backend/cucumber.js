@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 const common = ['--require-module ts-node/register'];
 
-const SPWebBackend = [
+const frontofficeBackend = [
   ...common,
-  'tests/apps/SPWeb/backend/features/**/*.feature',
-  '--require tests/apps/SPWeb/backend/features/stepDefinitions/*.steps.ts',
+  'test/FrontofficeBackend/app/features/**/*.feature',
+  '--require test/FrontofficeBackend/app/features/stepDefinitions/*.steps.ts',
 ].join(' ');
 
 module.exports = {
   default: '--publish-quiet',
-  SPWebBackend,
+  frontofficeBackend,
 };
