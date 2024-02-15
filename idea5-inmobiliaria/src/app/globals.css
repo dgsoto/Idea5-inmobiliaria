@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+  h1 {
+    @apply font-bold text-xl
+  }
+
+  body {
+    @apply font-body
+  }
+
+  h1, h2, h3 {
+    @apply font-body
+  }
+
+  h2 {
+    @apply font-semibold text-lg;
+  }
+
+  h3 {
+    @apply font-semibold text-base;
+  }
+
+  h4 {
+    @apply font-semibold;
+  }
+  .iconCard {
+    @apply text-2xl
+  }
+  .icon-description {
+    @apply flex gap-4 text-slate-200 font-semibold text-xl
+  }
+}
