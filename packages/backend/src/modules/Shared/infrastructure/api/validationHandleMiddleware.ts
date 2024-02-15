@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { ValidationError, validationResult } from 'express-validator';
 import httpStatus from 'http-status';
-import { ResponseBase } from '../../context/Shared/application/ResponseBase';
+import { ResponseBase } from '../../application/ResponseBase';
 
 export function validateReqSchema(req: Request, res: Response, next: NextFunction): void {
   const validationsErrors = validationResult(req);

@@ -1,0 +1,30 @@
+{
+  "name": "idea5-inmobiliaria",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {
+    "turbo": "^1.12.4"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dgsoto/Idea5-inmobiliaria.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dgsoto/Idea5-inmobiliaria/issues"
+  },
+  "homepage": "https://github.com/dgsoto/Idea5-inmobiliaria#readme",
+  "workspaces": [
+    "packages/*"
+  ]
+}
