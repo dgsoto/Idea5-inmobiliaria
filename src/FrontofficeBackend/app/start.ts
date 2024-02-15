@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import path from 'path';
 import dotenv from 'dotenv';
 import { BackendApp } from './BackendApp';
