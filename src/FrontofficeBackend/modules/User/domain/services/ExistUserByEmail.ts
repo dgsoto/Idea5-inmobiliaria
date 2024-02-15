@@ -6,7 +6,7 @@ import 'reflect-metadata';
 export class ExistUserByEmail {
   private readonly _repository: IUserRepository;
 
-  constructor(@inject('IUserRepository') repository: IUserRepository) {
+  constructor(@inject('UserRepository') repository: IUserRepository) {
     this._repository = repository;
   }
 

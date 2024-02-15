@@ -4,9 +4,10 @@
   "description": "Este proyecto tiene como objetivo desarrollar un sitio web destinado a evaluar opciones de compra, venta y alquiler de inmuebles en Latinoamérica, bajo el nombre de \"Inmobiliaria Bonpland\". La plataforma busca proporcionar a los usuarios un listado detallado de propiedades, permitiéndoles filtrar y encontrar el inmueble deseado. Además, se enfoca en facilitar el contacto con la inmobiliaria a través de referencias específicas.",
   "main": "index.js",
   "scripts": {
-    "dev:fo:backend": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/FrontofficeBackend/app/start.ts",
-    "test:fo:backend:features": "NODE_ENV=test cucumber-js -p frontofficeBackend",
-    "test:fo:backend:unit": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles",
+    "dev:backend": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/FrontofficeBackend/app/start.ts",
+    "test": "npm run test:backend:unit && npm run test:backend:features",
+    "test:backend:features": "NODE_ENV=test cucumber-js -p frontofficeBackend",
+    "test:backend:unit": "NODE_ENV=test jest --verbose --runInBand --detectOpenHandles",
     "prisma:generate": "cd src/FrontofficeBackend/modules/shared/infrastructure/persistence && npx prisma generate",
     "prisma:push": "cd src/FrontofficeBackend/modules/shared/infrastructure/persistence && npx prisma db push",
     "lint": "eslint src/**/*.ts",

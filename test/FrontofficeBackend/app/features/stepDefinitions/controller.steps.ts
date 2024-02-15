@@ -1,15 +1,30 @@
 import request from 'supertest';
-import { Given, Then, BeforeAll, AfterAll } from '@cucumber/cucumber';
+import { Given, Then, BeforeAll, AfterAll, BeforeStep } from '@cucumber/cucumber';
 import assert from 'assert';
 import { BackendApp } from '../../../../../src/FrontofficeBackend/app/BackendApp';
+import { EnvironmentArranger } from '../../../modules/shared/infrastructure/EnvironmentArranger';
+import { testContainer } from '../../../modules/shared/infrastructure/testContainer';
 
 let _request: request.Test;
 let application: BackendApp;
 let _response: request.Response;
 
+const environmentArranger: EnvironmentArranger = testContainer.resolve('PrismaEnvironmentArranger');
+
 BeforeAll(async () => {
+  await environmentArranger.arrange();
   application = new BackendApp();
   await application.start();
+});
+
+BeforeStep(async () => {
+  await (await environmentArranger).arrange();
+  await (await environmentArranger).close();
+});
+AfterAll(async () => {
+  await (await environmentArranger).arrange();
+  await (await environmentArranger).close();
+  await application.stop();
 });
 
 Given('I send a GET request to {string}', (route: string) => {
@@ -36,8 +51,4 @@ Then('the response should be', () => {
     code: 201,
     status_code: 'Created',
   });
-});
-
-AfterAll(async () => {
-  await application.stop();
 });

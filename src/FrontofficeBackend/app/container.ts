@@ -9,7 +9,7 @@ import { CreateUserController } from '../modules/User/infrastructure/api/CreateU
 import { IHashService } from '../modules/User/domain/services/IHashService';
 import { HashService } from '../modules/User/infrastructure/security/HashService';
 
-container.register<IUserRepository>('IUserRepository', { useClass: UserRepository });
+container.register<IUserRepository>('UserRepository', { useClass: UserRepository });
 container.register('ExistUserByEmail', { useClass: ExistUserByEmail });
 container.register('ExistUserById', { useClass: ExistUserById });
 container.register('CreateUserUseCase', { useClass: CreateUserUseCase });

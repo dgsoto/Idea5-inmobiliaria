@@ -12,15 +12,7 @@ import { UserLastname } from '../../domain/UserLastname';
 import { UserEmail } from '../../domain/UserEmail';
 import { UserPassword } from '../../domain/UserPassword';
 import { UserPhone } from '../../domain/UserPhone';
-
-interface ICreateUserRequest {
-  id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  password: string;
-  phone: string;
-}
+import { ICreateUserRequest } from './ICreateUserRequest';
 
 @injectable()
 export class CreateUserUseCase {
@@ -29,7 +21,7 @@ export class CreateUserUseCase {
   private readonly checkById: ExistUserById;
 
   constructor(
-    @inject('IUserRepository') repository: IUserRepository,
+    @inject('UserRepository') repository: IUserRepository,
     @inject('ExistUserByEmail') checkByEmail: ExistUserByEmail,
     @inject('ExistUserById') checkById: ExistUserById,
   ) {
@@ -49,7 +41,7 @@ export class CreateUserUseCase {
       new UserFirstname(req.firstname),
       new UserLastname(req.lastname),
       new UserEmail(req.email),
-      new UserPassword(req.password, container.resolve('HashService')),
+      await new UserPassword(req.password, container.resolve('HashService')).validate(),
       new UserPhone(req.phone),
     );
     await this._repository.create(user);

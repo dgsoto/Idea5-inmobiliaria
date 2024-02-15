@@ -19,18 +19,13 @@ export class UserRepository implements IUserRepository {
   }
 
   async create(userData: User): Promise<void> {
-    const userPassword: UserPassword = await UserPassword.createAndHash(userData.password.getValue(), container.resolve('HashService'));
-    console.log(userPassword.getHashedValue());
-
-    userPassword.validate();
-    console.log(userPassword.getHashedValue());
     await this.prisma.user.create({
       data: {
         id: userData.id.value,
         firstname: userData.firstname.toString(),
         lastname: userData.lastname.toString(),
         email: userData.email.toString(),
-        password: userPassword.getHashedValue(),
+        password: userData.password.toString(),
         phone: userData.phone.toString(),
       },
     });

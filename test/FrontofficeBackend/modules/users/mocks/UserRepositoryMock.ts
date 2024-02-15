@@ -14,7 +14,7 @@ export class UserRepositoryMock implements IUserRepository {
   }
 
   async getById(id: string): Promise<User | null> {
-    const user = this.users.find((u) => u.id === id);
+    const user = this.users.find((u) => u.id.value === id);
     return user ?? null;
   }
 
@@ -25,7 +25,7 @@ export class UserRepositoryMock implements IUserRepository {
   }
 
   async getByEmail(email: string): Promise<User | null> {
-    const user = this.users.find((u) => u.id === email);
+    const user = this.users.find((u) => u.id.value === email);
     return user ?? null;
   }
 

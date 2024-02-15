@@ -11,8 +11,8 @@ Feature: Register an new user
           "firstname": "Jose Luis",
           "lastname": "Sandoval",
           "email": "docs.huehue@gmail.com",
-          "password": "test12345"
-          
+          "password": "test12345",
+          "phone": "1234567898"
       }
       """
     Then the response status code should be 201
