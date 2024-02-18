@@ -1,9 +1,9 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "pipeline": {
-        "dev": {
-            "cache": false
-        },
-        "dev:backend": { "cache": false }
-    }
+	"$schema": "https://turbo.build/schema.json",
+	"pipeline": {
+		"dev": { "cache": false },
+		"test": { "cache": false },
+		"test:unit": { "cache": false },
+		"test:features": { "cache": false }
+	}
 }

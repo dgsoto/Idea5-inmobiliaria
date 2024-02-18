@@ -1,7 +1,7 @@
+import 'reflect-metadata';
 import { Request, Response, NextFunction } from 'express';
 import { IController } from '../../../Shared/infrastructure/api/IController';
 import httpStatus from 'http-status';
-import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { CreateUserUseCase } from '../../application/create/CreateUserUseCase';
 import { ResponseBase } from '../../../../modules/Shared/application/ResponseBase';

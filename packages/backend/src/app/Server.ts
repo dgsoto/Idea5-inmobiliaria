@@ -2,6 +2,7 @@ import { json, urlencoded } from 'body-parser';
 import express from 'express';
 import type * as http from 'http';
 import router from './routes';
+import { invalidArgumentErrorHandler } from '../modules/Shared/infrastructure/api/invalidArgumentErrorHandler';
 
 export class Server {
   private readonly express: express.Express;
@@ -13,7 +14,7 @@ export class Server {
     this.express = express();
     this.express.use(json());
     this.express.use(urlencoded({ extended: true }));
-
+    this.express.use(invalidArgumentErrorHandler);
     this.express.use('/api', router);
   }
 

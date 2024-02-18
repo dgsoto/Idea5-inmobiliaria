@@ -1,11 +1,11 @@
 import 'reflect-metadata';
-import { IUserRepository } from '../../../../../src/FrontofficeBackend/modules/User/domain/IUserRepository';
-import { container } from '../../../../../src/FrontofficeBackend/app/container';
+import { IUserRepository } from '../../../../src/modules/User/domain/IUserRepository';
 import { UserMother } from '../domain/UserMother';
 import { EnvironmentArranger } from '../../shared/infrastructure/EnvironmentArranger';
-import { testContainer } from '../../shared/infrastructure/testContainer';
+import { testContainer } from '../../shared/testContainer';
+import { userContainer } from '../../../../src/modules/User/userContainer';
 
-const repository: IUserRepository = container.resolve<IUserRepository>('UserRepository');
+const repository: IUserRepository = userContainer.resolve<IUserRepository>('UserRepository');
 const environmentArranger: EnvironmentArranger = testContainer.resolve('PrismaEnvironmentArranger');
 
 beforeAll(async () => {

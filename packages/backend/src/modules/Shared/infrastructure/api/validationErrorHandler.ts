@@ -11,8 +11,8 @@ export function validateReqSchema(req: Request, res: Response, next: NextFunctio
     return;
   }
 
-  const errors = validationsErrors.array().map((err: ValidationError) => ({ [err.type]: err.msg }));
+  const errors: string[] = validationsErrors.array().map((err: ValidationError) => err.msg);
 
-  const response = new ResponseBase(false, 'One or more validation errors were found', errors);
+  const response = new ResponseBase(false, httpStatus.UNPROCESSABLE_ENTITY, httpStatus[422], 'Error validating registration data', undefined, errors);
   res.status(httpStatus.UNPROCESSABLE_ENTITY).json(response);
 }

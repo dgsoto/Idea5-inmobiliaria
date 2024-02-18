@@ -1,9 +1,9 @@
 import request from 'supertest';
 import { Given, Then, BeforeAll, AfterAll, BeforeStep } from '@cucumber/cucumber';
 import assert from 'assert';
-import { BackendApp } from '../../../../../src/FrontofficeBackend/app/BackendApp';
-import { EnvironmentArranger } from '../../../FrontofficeBackend/modules/shared/infrastructure/EnvironmentArranger';
-import { testContainer } from '../../../FrontofficeBackend/modules/shared/infrastructure/testContainer';
+import { BackendApp } from '../../../../src/app/BackendApp';
+import { EnvironmentArranger } from '../../../modules/shared/infrastructure/EnvironmentArranger';
+import { testContainer } from '../../../modules/shared/testContainer';
 
 let _request: request.Test;
 let application: BackendApp;

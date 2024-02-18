@@ -1,6 +1,6 @@
 import 'reflect-metadata';
-import { IUserRepository } from '../../../../../src/FrontofficeBackend/modules/User/domain/IUserRepository';
-import { User } from '../../../../../src/FrontofficeBackend/modules/User/domain/User';
+import { IUserRepository } from '../../../../src/modules/User/domain/IUserRepository';
+import { User } from '../../../../src/modules/User/domain/User';
 
 export class UserRepositoryMock implements IUserRepository {
   private createMock: jest.Mock;

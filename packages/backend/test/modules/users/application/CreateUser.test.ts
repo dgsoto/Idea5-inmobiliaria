@@ -1,10 +1,10 @@
 import 'reflect-metadata';
-import { CreateUserUseCase } from '../../../../../src/FrontofficeBackend/modules/User/application/create/CreateUserUseCase';
-import { ExistUserByEmail } from '../../../../../src/FrontofficeBackend/modules/User/domain/services/ExistUserByEmail';
-import { ExistUserById } from '../../../../../src/FrontofficeBackend/modules/User/domain/services/ExistUserById';
-import { UserRepositoryMock } from '../mocks/UserRepositoryMock';
+import { CreateUserUseCase } from '../../../../src/modules/User/application/create/CreateUserUseCase';
+import { ExistUserByEmail } from '../../../../src/modules/User/domain/services/ExistUserByEmail';
+import { ExistUserById } from '../../../../src/modules/User/domain/services/ExistUserById';
 import { CreateUserMother } from './CreateUserMother';
 import { UserMother } from '../domain/UserMother';
+import { UserRepositoryMock } from '../mocks/UserRepositoryMock';
 
 let repository: UserRepositoryMock;
 let useCase: CreateUserUseCase;

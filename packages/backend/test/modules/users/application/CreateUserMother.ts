@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker';
-import { ICreateUserRequest } from '../../../../../src/FrontofficeBackend/modules/User/application/create/ICreateUserRequest';
-import { UserEmail } from '../../../../../src/FrontofficeBackend/modules/User/domain/UserEmail';
-import { UserFirstname } from '../../../../../src/FrontofficeBackend/modules/User/domain/UserFirstname';
-import { UserId } from '../../../../../src/FrontofficeBackend/modules/User/domain/UserId';
-import { UserLastname } from '../../../../../src/FrontofficeBackend/modules/User/domain/UserLastname';
-import { UserPassword } from '../../../../../src/FrontofficeBackend/modules/User/domain/UserPassword';
-import { UserPhone } from '../../../../../src/FrontofficeBackend/modules/User/domain/UserPhone';
-import { container } from '../../../../../src/FrontofficeBackend/app/container';
+import { ICreateUserRequest } from '../../../../src/modules/User/application/create/ICreateUserRequest';
+import { UserEmail } from '../../../../src/modules/User/domain/UserEmail';
+import { UserFirstname } from '../../../../src/modules/User/domain/UserFirstname';
+import { UserId } from '../../../../src/modules/User/domain/UserId';
+import { UserLastname } from '../../../../src/modules/User/domain/UserLastname';
+import { UserPassword } from '../../../../src/modules/User/domain/UserPassword';
+import { UserPhone } from '../../../../src/modules/User/domain/UserPhone';
+import { userContainer } from '../../../../src/modules/User/userContainer';
 
 export class CreateUserMother {
   static create(
@@ -27,7 +27,7 @@ export class CreateUserMother {
     };
   }
   static async random(): Promise<ICreateUserRequest> {
-    const hashedPassword = await new UserPassword(faker.internet.password(), container.resolve('HashService')).validate();
+    const hashedPassword = await new UserPassword(faker.internet.password(), userContainer.resolve('HashService')).validate();
     return this.create(
       new UserId(faker.string.uuid()),
       new UserFirstname(faker.person.firstName()),

@@ -1,10 +1,10 @@
-import { container, inject, injectable } from 'tsyringe';
+import 'reflect-metadata';
+import { inject, injectable } from 'tsyringe';
 import { IUserRepository } from '../../domain/IUserRepository';
 import { UseIdAlreadyExistError } from '../../domain/errors/UseIdAlreadyExistError';
 import { UserEmailAlreadyExistError } from '../../domain/errors/UserEmailAlreadyExistError';
 import { ExistUserByEmail } from '../../domain/services/ExistUserByEmail';
 import { ExistUserById } from '../../domain/services/ExistUserById';
-import 'reflect-metadata';
 import { User } from '../../domain/User';
 import { UserId } from '../../domain/UserId';
 import { UserFirstname } from '../../domain/UserFirstname';
@@ -13,6 +13,7 @@ import { UserEmail } from '../../domain/UserEmail';
 import { UserPassword } from '../../domain/UserPassword';
 import { UserPhone } from '../../domain/UserPhone';
 import { ICreateUserRequest } from './ICreateUserRequest';
+import { userContainer } from '../../userContainer';
 
 @injectable()
 export class CreateUserUseCase {
@@ -41,7 +42,7 @@ export class CreateUserUseCase {
       new UserFirstname(req.firstname),
       new UserLastname(req.lastname),
       new UserEmail(req.email),
-      await new UserPassword(req.password, container.resolve('HashService')).validate(),
+      await new UserPassword(req.password, userContainer.resolve('HashService')).validate(),
       new UserPhone(req.phone),
     );
     await this._repository.create(user);
