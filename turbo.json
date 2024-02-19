@@ -4,6 +4,8 @@
 		"dev": { "cache": false },
 		"test": { "cache": false },
 		"test:unit": { "cache": false },
-		"test:features": { "cache": false }
+		"test:features": { "cache": false },
+		"prisma:generate": { "cache": false},
+		"prisma:push": { "cache": false}
 	}
 }

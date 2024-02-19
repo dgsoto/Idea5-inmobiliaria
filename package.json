@@ -13,7 +13,9 @@
     "dev": "turbo run dev",
     "test": "turbo run test",
     "test:unit":"turbo run test:unit",
-    "test:features": "turbo run test:features"
+    "test:features": "turbo run test:features",
+    "prisma:generate": "turbo run prisma:generate",
+    "prisma:push": "turbo run prisma:push"
   },
   "repository": {
     "type": "git",
