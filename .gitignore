@@ -8,9 +8,10 @@
 
 # testing
 /coverage
+/cache
 
 # next.js
-/.next/
+/.next/*
 /out/
 
 # production
