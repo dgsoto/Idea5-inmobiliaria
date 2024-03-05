@@ -1,9 +1,9 @@
 import { container } from 'tsyringe';
-import { AuthRepository } from './persistence/auth.repository';
-import { AuthController } from './api/auth.controller';
-import { IAuthRepository } from '../domain/interfaces/auth.interface';
+import { AuthRepository } from './persistence/AuthRepository';
+import { AuthController } from './api/LoginController';
+import { IAuthRepository } from '../domain/IAuthRepository';
 import { IController } from 'src/modules/Shared/infrastructure/api/IController';
-import { LoginUseCase } from '../application/logInUseCase';
+import { LoginUseCase } from '../application/login/LoginUseCase';
 
 container.register<IAuthRepository>('AuthRepository', { useClass: AuthRepository });
 container.register<IController>('AuthController', { useClass: AuthController });

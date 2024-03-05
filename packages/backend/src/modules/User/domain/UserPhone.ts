@@ -10,7 +10,7 @@ export class UserPhone extends StringValueObject {
   private ensureIsValidPhone(value: string) {
     if (!/^\d{10}$/.test(value)) {
       console.log(value);
-      throw new InvalidArgumentError(`The 'Phone' property: '<${value}>' must be a valid 'Phone'`);
+      throw new InvalidArgumentError(`The 'Phone' property: '${value}' must be a valid 'Phone'`);
     }
   }
 }

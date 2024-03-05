@@ -22,7 +22,7 @@ export class UserPassword extends StringValueObject {
 
   private ensureLengthIsBetween8And100Characters(value: string) {
     if (value.length < 8 || value.length > 100) {
-      throw new InvalidArgumentError(`The 'Password' property: '<${value}>' must be between 8 and 100 characters`);
+      throw new InvalidArgumentError(`The 'Password' property: '${value}' must be between 8 and 100 characters`);
     }
   }
 

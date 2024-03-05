@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { IAuthRepository } from '../../domain/interfaces/auth.interface';
+import { IAuthRepository } from '../../domain/IAuthRepository';
 
 export class AuthRepository implements IAuthRepository {
   private prisma: PrismaClient;
@@ -9,7 +9,7 @@ export class AuthRepository implements IAuthRepository {
   }
 
   async getByEmail(email: string): Promise<any> {
-    const userData = await this.prisma.users.findFirst({ where: { email: email } });
+    const userData = await this.prisma.user.findFirst({ where: { email: email } });
     return userData;
   }
 }

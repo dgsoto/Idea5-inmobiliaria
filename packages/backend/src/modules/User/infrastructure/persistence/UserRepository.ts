@@ -26,7 +26,8 @@ export class UserRepository implements IUserRepository {
         lastname: userData.lastname.toString(),
         email: userData.email.toString(),
         password: userData.password.toString(),
-        phone: userData.phone.toString(),
+        cell_phone: userData.phone.toString(),
+        role_id: '38d436a9-f512-4e95-b871-553bab740e7a',
       },
     });
   }
@@ -40,7 +41,7 @@ export class UserRepository implements IUserRepository {
           new UserLastname(userData.lastname),
           new UserEmail(userData.email),
           new UserPassword(userData.password, container.resolve('HashService')),
-          new UserPhone(userData.phone),
+          new UserPhone(userData.cell_phone),
         )
       : null;
   }
@@ -54,7 +55,7 @@ export class UserRepository implements IUserRepository {
           new UserLastname(userData.lastname),
           new UserEmail(userData.email),
           new UserPassword(userData.password, container.resolve('HashService')),
-          new UserPhone(userData.phone),
+          new UserPhone(userData.cell_phone),
         )
       : null;
   }

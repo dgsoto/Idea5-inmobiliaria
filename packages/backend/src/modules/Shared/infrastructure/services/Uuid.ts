@@ -15,7 +15,7 @@ export class Uuid implements IUuid {
 
   isValidUuid(uuid: string): void {
     if (!validate(uuid)) {
-      throw new InvalidArgumentError(`The 'Id' property: '<${uuid}>' must be a valid 'Uuid'`);
+      throw new InvalidArgumentError(`The 'Id' property: '${uuid}' must be a valid 'Uuid'`);
     }
   }
 }

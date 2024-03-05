@@ -9,7 +9,7 @@ export class UserEmail extends StringValueObject {
 
   private ensureIsValidEmail(value: string) {
     if (!/^[a-zA-Z0-9._-]{3,}@(?!.*\.\.)[a-zA-Z0-9.-]{3,}\.[a-zA-Z]{2,}$/.test(value)) {
-      throw new InvalidArgumentError(`The 'Email' property: '<${value}>' must be a valid 'Email'`);
+      throw new InvalidArgumentError(`The 'Email' property: '${value}' must be a valid 'Email'`);
     }
   }
 }

@@ -4,7 +4,7 @@ import { IController } from '../../../Shared/infrastructure/api/IController';
 import httpStatus from 'http-status';
 import { inject, injectable } from 'tsyringe';
 import { CreateUserUseCase } from '../../application/create/CreateUserUseCase';
-import { ResponseBase } from '../../../../modules/Shared/application/ResponseBase';
+import { ResponseBase } from '../../../Shared/application/ResponseBase';
 
 type CreatePutRequest = Request & {
   body: {

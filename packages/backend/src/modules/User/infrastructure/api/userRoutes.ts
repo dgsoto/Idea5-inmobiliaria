@@ -5,7 +5,7 @@ import { IController } from '../../../Shared/infrastructure/api/IController';
 import { CreateUserValidator } from '../../application/create/CreateUserValidator';
 import { userContainer } from '../../userContainer';
 import httpStatus from 'http-status';
-import { ResponseBase } from '../../../../modules/Shared/application/ResponseBase';
+import { ResponseBase } from '../../../Shared/application/ResponseBase';
 import { UseIdAlreadyExistError } from '../../domain/errors/UseIdAlreadyExistError';
 import { UserEmailAlreadyExistError } from '../../domain/errors/UserEmailAlreadyExistError';
 

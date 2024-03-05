@@ -8,27 +8,27 @@ datasource db {
 }
 
 model assigned {
-  id   String @id @default(uuid())
+  id           String           @id @default(uuid())
   assigned     assigned_status?
-  privilege_id String         
-  role_id      String          
+  privilege_id String
+  role_id      String
   privilege    privilege        @relation(fields: [privilege_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   role         role             @relation(fields: [role_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model message {
-  id   String @id @default(uuid())
+  id         String  @id @default(uuid())
   name       String? @db.VarChar(150)
   email      String? @db.VarChar(150)
   cell_phone String? @db.VarChar(15)
   subjet     String? @db.VarChar(250)
   message    String? @db.VarChar(1000)
-  user_id    String 
-  users      users   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user_id    String
+  user       user    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model privilege {
-  id   String @id @default(uuid())
+  id           String     @id @default(uuid())
   module_name  String?    @db.VarChar(250)
   module_path  String?    @db.VarChar(250)
   module_state String?    @db.VarChar(1)
@@ -36,7 +36,7 @@ model privilege {
 }
 
 model property {
-  id   String @id @default(uuid())
+  id                   String                 @id @default(uuid())
   agent_reference      String?                @db.VarChar(150)
   address              String?                @db.VarChar(150)
   num_rooms            Int?
@@ -46,8 +46,8 @@ model property {
   title                String?                @db.VarChar(300)
   description          String?                @db.VarChar(1000)
   google_map           String?                @db.VarChar(150)
-  property_owner_id    String              
-  property_type_id     String                 
+  property_owner_id    String
+  property_type_id     String
   property_owner       property_owner         @relation(fields: [property_owner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   property_type        property_type          @relation(fields: [property_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   property_publication property_publication[]
@@ -55,7 +55,7 @@ model property {
 }
 
 model property_owner {
-  id   String @id @default(uuid())
+  id          String        @id @default(uuid())
   name        String?       @db.VarChar(150)
   cell_phone  Int?
   email       String?       @db.VarChar(150)
@@ -64,56 +64,56 @@ model property_owner {
 }
 
 model property_publication {
-  id   String @id @default(uuid())
+  id               String                      @id @default(uuid())
   publication_date String?                     @db.VarChar(20)
   state            property_publication_state?
-  user_id          String                      
-  property_id      String                      
+  user_id          String
+  property_id      String
   property         property                    @relation(fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users            users                       @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user             user                        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model property_type {
-  id   String @id @default(uuid())
+  id       String              @id @default(uuid())
   name     property_type_name?
   property property[]
 }
 
 model real_estate_photos {
-  id   String @id @default(uuid())
+  id          String   @id @default(uuid())
   photo       String?  @db.VarChar(300)
-  property_id String   
+  property_id String
   property    property @relation(fields: [property_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model role {
-  id   String @id @default(uuid())
+  id         String     @id @default(uuid())
   role_name  String?    @db.VarChar(150)
   role_state String?    @db.VarChar(1)
   assigned   assigned[]
-  users      users[]
+  user       user[]
 }
 
 model transaction {
-  id   String @id @default(uuid())
+  id                String                 @id @default(uuid())
   transaction_type  transaction_type_enum?
   transaction_date  String?                @db.VarChar(20)
-  property_owner_id String                
-  user_id           String                 
+  property_owner_id String
+  user_id           String
   property_owner    property_owner         @relation(fields: [property_owner_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users             users                  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  user              user                   @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model users {
-  id   String @id @default(uuid())
-  firstname            String?                @db.VarChar(100)
-  lastname             String?                @db.VarChar(100)
-  email                String?                @db.VarChar(150)
-  password             String?                @db.VarChar(150)
+model user {
+  id                   String                 @id @default(uuid())
+  firstname            String                 @db.VarChar(100)
+  lastname             String                 @db.VarChar(100)
+  email                String                 @unique @db.VarChar(150)
+  password             String                 @db.VarChar(150)
   photo                String?                @db.VarChar(300)
-  cell_phone           String?                @db.VarChar(15)
-  user_type            user_type_enum?
-  role_id              String                
+  cell_phone           String                 @db.VarChar(15)
+  user_type            user_type_enum?        @default(Client)
+  role_id              String
   message              message[]
   property_publication property_publication[]
   transaction          transaction[]
@@ -128,7 +128,7 @@ enum assigned_status {
 
 enum property_publication_state {
   Active
-  Desactive 
+  Desactive
 }
 
 enum property_state {
