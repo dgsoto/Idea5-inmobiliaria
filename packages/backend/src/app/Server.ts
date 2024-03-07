@@ -2,6 +2,7 @@ import { json, urlencoded } from 'body-parser';
 import express from 'express';
 import type * as http from 'http';
 import router from './routes';
+import cors from 'cors';
 import { invalidArgumentErrorHandler } from '../modules/Shared/infrastructure/api/invalidArgumentErrorHandler';
 
 export class Server {
@@ -51,7 +52,4 @@ export class Server {
       resolve();
     });
   }
-}
-function cors(): any {
-  throw new Error('Function not implemented.');
 }
