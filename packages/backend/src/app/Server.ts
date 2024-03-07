@@ -12,6 +12,7 @@ export class Server {
   constructor(port: string) {
     this.port = port;
     this.express = express();
+    this.express.use(cors());
     this.express.use(json());
     this.express.use(urlencoded({ extended: true }));
     this.express.use(invalidArgumentErrorHandler);
@@ -50,4 +51,7 @@ export class Server {
       resolve();
     });
   }
+}
+function cors(): any {
+  throw new Error('Function not implemented.');
 }
