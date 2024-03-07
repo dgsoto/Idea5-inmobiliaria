@@ -1,15 +1,19 @@
+import { FieldValues, useFormContext } from "react-hook-form";
 
-type SubmitButtonProps = {
-    title: string;
+type SubmitButtonProps<T> = {
+    label: string;
     styles?: string;
-    icon?: React.ReactNode;
+    onSubmit: (data: T)=> void;
 }
 
-const SubmitButton = ({title, styles, icon}: SubmitButtonProps) => {
-    return <button className={`flex w-3/4 justify-center rounded-xl px-4 py-2 ${styles ?? ''}`}>
-        {icon ? <span>{icon}</span> : ''}
-        <p>{title}</p>
-    </button>
+const SubmitButton = <T extends FieldValues,>({ label, styles, onSubmit }: SubmitButtonProps<T>) => {
+    const {handleSubmit} = useFormContext<T>();
+    return <div className={`${styles ?? ''}`}>
+        <button
+            onClick={handleSubmit(onSubmit)}
+            className="button-primary">
+            {label}</button>
+    </div>
 }
 
 export default SubmitButton
