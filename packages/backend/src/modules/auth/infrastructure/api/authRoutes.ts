@@ -13,6 +13,12 @@ const router = Router();
 const controller: IController = authContainer.resolve('AuthController');
 
 router.post('/login', loginValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
+  /**
+    #swagger.requestBody = {
+        required: true,
+        schema: { $ref: "#/components/schemas/LoginRequest" }
+    }
+     */
   await controller.run(req, res, next);
 });
 

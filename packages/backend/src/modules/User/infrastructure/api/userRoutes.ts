@@ -14,6 +14,12 @@ const router = Router();
 const controller: IController = userContainer.resolve('CreateUserController');
 
 router.put('/:id', CreateUserValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
+  /**
+    #swagger.requestBody = {
+        required: true,
+        schema: { $ref: "#/components/schemas/CreatePutRequest" }
+    }
+     */
   await controller.run(req, res, next);
 });
 

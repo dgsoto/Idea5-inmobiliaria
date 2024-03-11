@@ -4,6 +4,8 @@ import type * as http from 'http';
 import router from './routes';
 import cors from 'cors';
 import { invalidArgumentErrorHandler } from '../modules/Shared/infrastructure/api/invalidArgumentErrorHandler';
+import swaggerUi from 'swagger-ui-express';
+import swaggerOutput from '../../swagger_output.json';
 
 export class Server {
   private readonly express: express.Express;
@@ -18,6 +20,7 @@ export class Server {
     this.express.use(urlencoded({ extended: true }));
     this.express.use(invalidArgumentErrorHandler);
     this.express.use('/api', router);
+    this.express.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerOutput));
   }
 
   async listen(): Promise<void> {

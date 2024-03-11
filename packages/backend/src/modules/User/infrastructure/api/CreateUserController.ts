@@ -6,7 +6,7 @@ import { inject, injectable } from 'tsyringe';
 import { CreateUserUseCase } from '../../application/create/CreateUserUseCase';
 import { ResponseBase } from '../../../Shared/application/ResponseBase';
 
-type CreatePutRequest = Request & {
+type CreateUserRequest = Request & {
   body: {
     id: string;
     firstname: string;
@@ -25,7 +25,7 @@ export class CreateUserController implements IController {
     this._createUserUseCase = createUserUseCase;
   }
 
-  public async run(req: CreatePutRequest, res: Response, next: NextFunction): Promise<void> {
+  public async run(req: CreateUserRequest, res: Response, next: NextFunction): Promise<void> {
     try {
       const { id, firstname, lastname, email, password, phone } = req.body;
 
