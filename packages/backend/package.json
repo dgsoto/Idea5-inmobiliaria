@@ -11,12 +11,13 @@
     "prisma:generate": "cd src/modules/Shared/infrastructure/persistence && npx prisma generate",
     "prisma:push": "cd src/modules/Shared/infrastructure/persistence && npx prisma db push",
     "lint": "eslint src/**/*.ts",
-    "format": "eslint src/**/*.ts --fix"
+    "format": "eslint src/**/*.ts --fix",
+    "swagger": "ts-node swagger.ts"
   },
   "prisma": {
     "schema": "src/modules/Shared/infrastructure/persistence/prisma/schema.prisma"
   },
-  "swagger": "ts-node swagger.ts",
+  
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "version": "v1.0.0",
-    "title": "Api documentation",
+    "title": "Bonpland Api documentation",
     "description": ""
   },
   "servers": [
@@ -12,19 +12,9 @@
     }
   ],
   "paths": {
-    "/users/{id}": {
-      "put": {
+    "/users/": {
+      "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "default": {
             "description": ""
@@ -35,12 +25,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreatePutRequest"
+                "$ref": "#/components/schemas/CreateUserRequest"
               }
             },
             "application/xml": {
               "schema": {
-                "$ref": "#/components/schemas/CreatePutRequest"
+                "$ref": "#/components/schemas/CreateUserRequest"
               }
             }
           }
@@ -81,7 +71,7 @@
       }
     },
     "schemas": {
-      "CreatePutRequest": {
+      "CreateUserRequest": {
         "type": "object",
         "properties": {
           "id": {
@@ -110,7 +100,7 @@
           }
         },
         "xml": {
-          "name": "CreatePutRequest"
+          "name": "CreateUserRequest"
         }
       },
       "LoginRequest": {

@@ -4,7 +4,7 @@ Feature: Register an new user
     I want to create a new account
 
   Scenario: A valin non existing user
-    Given I send a PUT request to "/api/users/d7cd6582-7010-48e3-aab4-c1b69d38c511" with body:
+    Given I send a POST request to "/api/users" with body:
       """
       {
           "id":"d7cd6582-7010-48e3-aab4-c1b69d38c511",
@@ -19,7 +19,7 @@ Feature: Register an new user
     And the response should be
 
   Scenario: An invalid non existing user
-    Given I send a PUT request to "/api/users/d7cd6582-7010-48e3-aab4-c1b69d38c511" with body:
+    Given I send a POST request to "/api/users" with body:
       """
       {
           "id":"d7cd6582-7010-48e3-aab4-c1b69d38c511",

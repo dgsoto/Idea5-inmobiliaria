@@ -3,7 +3,7 @@ import swaggerAutogen from 'swagger-autogen';
 const doc = {
   info: {
     version: 'v1.0.0',
-    title: 'Api documentation',
+    title: 'Bonpland Api documentation',
     description: '',
   },
   servers: [
@@ -20,7 +20,7 @@ const doc = {
       },
     },
     schemas: {
-      CreatePutRequest: {
+      CreateUserRequest: {
         id: 'string',
         firstname: 'string',
         lastname: 'string',
