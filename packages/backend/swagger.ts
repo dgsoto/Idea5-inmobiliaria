@@ -8,7 +8,7 @@ const doc = {
   },
   servers: [
     {
-      url: 'http://localhost:3002/api',
+      url: 'http://localhost:3002',
       description: '',
     },
   ],
@@ -43,6 +43,6 @@ const doc = {
 };
 
 const outputFile = './swagger_output.json';
-const endpointsFiles = ['./src/app/routes.ts'];
+const endpointsFiles = ['./src/app/Server.ts'];
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc);
