@@ -33,6 +33,11 @@ const doc = {
         email: 'string',
         password: 'string',
       },
+      CreateRoleRequest: {
+        id: 'string',
+        roleName: 'string',
+        roleState: 'string',
+      },
     },
   },
 };

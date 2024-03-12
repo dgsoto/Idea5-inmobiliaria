@@ -88,8 +88,8 @@ model real_estate_photos {
 
 model role {
   id         String     @id @default(uuid())
-  role_name  String?    @db.VarChar(150)
-  role_state String?    @db.VarChar(1)
+  role_name  String    @db.VarChar(50)
+  role_state String    @db.VarChar(10)
   assigned   assigned[]
   user       user[]
 }
