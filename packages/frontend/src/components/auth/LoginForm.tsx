@@ -20,7 +20,7 @@ const LoginForm = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await fetch('http://localhost:3002/api/login', {
+      const response = await fetch('http://localhost:3002/api/auth', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

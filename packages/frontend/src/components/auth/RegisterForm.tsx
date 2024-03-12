@@ -4,52 +4,39 @@ import { FormProvider, useForm } from "react-hook-form";
 import Link from "next/link"
 import InputText from "@/components/form/InputText"
 import SubmitButton from "@/components/form/SubmitButton"
-import { useState } from "react";
 
 
 type FormData = {
-    username: string;
+    id: string;
+    firstname: string;
     lastname: string;
-    code: number;
-    phone: number;
     email: string;
     password: string;
+    phone: number;
 }
 
 const RegisterForm = () => {
     const methods = useForm<FormData>();
-    const [errorMessage, setErrorMessage] = useState('');
-    
-    const { register, handleSubmit, formState : { errors } } = methods;
 
-    const onSubmit = async (data: FormData) => {
-        try {
-            const response = await fetch('http://localhost:3002/api/users', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(data)
-            });
-      
-            if (response.ok) {
-              // Usuario creado exitosamente
-              console.log('Usuario creado exitosamente');
-            } else {
-              // Manejar errores de creación de usuario
-              const errorData = await response.json();
-              setErrorMessage(errorData.error);
-            }
-          } catch (error) {
-            console.error('Error al crear usuario:', error);
-          }
-    }
+    const { register, handleSubmit, formState: { errors } } = methods;
+
+    const onSubmit = handleSubmit(async (data: FormData) => {
+            const res = await fetch(`/api/auth/register`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            const resJSON = await res.json()
+            console.log(resJSON);
+    })
 
     return <FormProvider {...methods}>
         <div className="bg-[#F9F6F6] flex flex-col items-center justify-center rounded-xl w-2/3 shadow-md px-20 py-12">
             <h2 className="text-gray-500">Para registrarte te pediremos algunos datos</h2>
             <span className="text-gray-600 mb-4">Solo te tomara unos minutos crear tu cuenta</span>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
                 <InputText
                     fieldName="name"
                     placeholder="Nombre *"
