@@ -6,7 +6,6 @@ import galpon from "@/assets/SETLOCAL1.png"
 
 import CardContainer from "@/components/card/CardContainer";
 
-
 export default function Home() {
 
   const containerStyles = {
@@ -30,7 +29,6 @@ export default function Home() {
 
   return <>
     <main className="w-full p-4">
-
       <section>
         <div className="grid grid-cols-12 items-center justify-around gap-2 col-span-12">
 
