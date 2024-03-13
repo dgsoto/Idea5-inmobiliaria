@@ -9,11 +9,13 @@ import { ResponseBase } from '../../../Shared/application/ResponseBase';
 import { RoleIdAlreadyExistError } from '../../domain/errors/RoleIdAlreadyExistError';
 import { RoleIdNotExistError } from '../../domain/errors/RoleIdNotExistError';
 import { UpdateRoleValidator } from '../../application/update/UpdateRoleValidator';
+import { DeleteRoleValidator } from '../../application/delete/DeleteRoleValidator';
 
 const router = Router();
 
 const createController: IController = roleContainer.resolve('CreateRoleController');
 const updateController: IController = roleContainer.resolve('UpdateRoleController');
+const deleteController: IController = roleContainer.resolve('DeleteRoleController');
 
 router.post('/', CreateRoleValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
   /**
@@ -37,6 +39,14 @@ router.put('/:id', UpdateRoleValidator, validateReqSchema, async (req: Request, 
   await updateController.run(req, res, next);
 });
 
+router.delete('/:id', DeleteRoleValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
+  /**
+    #swagger.tags = ['Roles']
+    }
+     */
+  await deleteController.run(req, res, next);
+});
+
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof RoleIdAlreadyExistError) {
     res
@@ -50,7 +60,7 @@ router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res
       .status(400)
       .json(
-        new ResponseBase<void>(false, httpStatus.BAD_REQUEST, httpStatus[400], 'Error updating Role', undefined, [
+        new ResponseBase<void>(false, httpStatus.BAD_REQUEST, httpStatus[400], 'Error processing Role', undefined, [
           "Role with this 'id' was not been registred",
         ]),
       );

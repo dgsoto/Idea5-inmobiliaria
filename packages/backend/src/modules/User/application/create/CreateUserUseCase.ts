@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { inject, injectable } from 'tsyringe';
 import { IUserRepository } from '../../domain/IUserRepository';
-import { UseIdAlreadyExistError } from '../../domain/errors/UseIdAlreadyExistError';
+import { UserIdAlreadyExistError } from '../../domain/errors/UserIdAlreadyExistError';
 import { UserEmailAlreadyExistError } from '../../domain/errors/UserEmailAlreadyExistError';
 import { ExistUserByEmail } from '../../domain/services/ExistUserByEmail';
 import { ExistUserById } from '../../domain/services/ExistUserById';
@@ -35,7 +35,7 @@ export class CreateUserUseCase {
     if (checkUserByEmail) throw new UserEmailAlreadyExistError();
 
     const checkUserById = await this.checkById.check(req.id);
-    if (checkUserById) throw new UseIdAlreadyExistError();
+    if (checkUserById) throw new UserIdAlreadyExistError();
 
     const user = await User.create(
       new UserId(req.id),

@@ -6,7 +6,7 @@ import { CreateUserValidator } from '../../application/create/CreateUserValidato
 import { userContainer } from '../../userContainer';
 import httpStatus from 'http-status';
 import { ResponseBase } from '../../../Shared/application/ResponseBase';
-import { UseIdAlreadyExistError } from '../../domain/errors/UseIdAlreadyExistError';
+import { UserIdAlreadyExistError } from '../../domain/errors/UserIdAlreadyExistError';
 import { UserEmailAlreadyExistError } from '../../domain/errors/UserEmailAlreadyExistError';
 
 const router = Router();
@@ -33,7 +33,7 @@ router.use((err: Error, req: Request, res: Response, next: NextFunction) => {
           "User with this 'email' already has been registred",
         ]),
       );
-  } else if (err instanceof UseIdAlreadyExistError) {
+  } else if (err instanceof UserIdAlreadyExistError) {
     res
       .status(400)
       .json(

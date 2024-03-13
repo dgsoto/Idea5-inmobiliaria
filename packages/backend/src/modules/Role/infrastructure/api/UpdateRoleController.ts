@@ -31,7 +31,7 @@ export class UpdateRoleController implements IController {
 
       const result = await this._updateRoleUseCase.run({ id, roleName, roleState });
 
-      const response = new ResponseBase<void>(true, httpStatus.OK, httpStatus[201], undefined, result);
+      const response = new ResponseBase<void>(true, httpStatus.OK, httpStatus[200], undefined, result);
 
       res.status(httpStatus.OK).send(response);
     } catch (error) {
