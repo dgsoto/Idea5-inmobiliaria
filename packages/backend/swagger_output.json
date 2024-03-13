@@ -14,6 +14,9 @@
   "paths": {
     "/api/users/": {
       "post": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -39,6 +42,9 @@
     },
     "/api/auth/login": {
       "post": {
+        "tags": [
+          "Authentication"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -64,6 +70,9 @@
     },
     "/api/roles/": {
       "post": {
+        "tags": [
+          "Roles"
+        ],
         "description": "",
         "responses": {
           "default": {
@@ -81,6 +90,44 @@
             "application/xml": {
               "schema": {
                 "$ref": "#/components/schemas/CreateRoleRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/roles/{id}": {
+      "put": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoleRequest"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRoleRequest"
               }
             }
           }
@@ -162,6 +209,22 @@
         },
         "xml": {
           "name": "CreateRoleRequest"
+        }
+      },
+      "UpdateRoleRequest": {
+        "type": "object",
+        "properties": {
+          "roleName": {
+            "type": "string",
+            "example": "string"
+          },
+          "roleState": {
+            "type": "string",
+            "example": "string"
+          }
+        },
+        "xml": {
+          "name": "UpdateRoleRequest"
         }
       }
     }

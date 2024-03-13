@@ -5,7 +5,6 @@ import Link from 'next/link';
 import InputText from '@/components/form/InputText';
 import SubmitButton from '@/components/form/SubmitButton';
 
-
 type FormData = {
 	id: string;
 	firstname: string;
@@ -15,9 +14,10 @@ type FormData = {
 	phone: string; // Cambiar a string, recuenda que los numeros telefonicos puede tener ceros  ala izquierda
 };
 
-const generateUUID = () => { //Agregamos funcion para generar el id, lo ideal es que sea atraves de un servicio
-    return uuidv4();
-  };
+const generateUUID = () => {
+	//Agregamos funcion para generar el id, lo ideal es que sea atraves de un servicio
+	return uuidv4();
+};
 
 const RegisterForm = () => {
 	const methods = useForm<FormData>();
@@ -28,31 +28,43 @@ const RegisterForm = () => {
 		formState: { errors },
 	} = methods;
 
-	const onSubmit = handleSubmit(async (data: FormData) => {
-
-        const uuid = generateUUID(); // Genera un UUID unico antes de enviar el formulario
-        data.id = uuid; // Asigna el UUID generado al campo 'id' en los datos del formulario
-    
-
-		const res = await fetch(`http://localhost:3002/api/users`, { //Cambiar la ruta a la que haces fetch, lo ideal es hacerlo atraves de una variable de entorno o una constante
-			method: 'POST',
-			body: JSON.stringify(data),
-			headers: {
+	const onSubmit = (data: FormData) => {
+		const handleSubmitAsync = async () => {
+		  const formData = methods.getValues(); // Obtén los datos del formulario usando useForm
+		  try {
+			const uuid = generateUUID(); // Genera un UUID único antes de enviar el formulario
+			formData.id = uuid; // Asigna el UUID generado al campo 'id' en los datos del formulario
+	  
+			const res = await fetch(`http://localhost:3002/api/users`, {
+			  method: 'POST',
+			  body: JSON.stringify(formData),
+			  headers: {
 				'Content-Type': 'application/json',
-			},
-		});
-		const resJSON = await res.json();
-		console.log(resJSON);
-	});
+			  },
+			});
+			const resJSON = await res.json();
+			console.log(resJSON);
+		  } catch (error) {
+			console.error('Error al enviar el formulario:', error);
+		  }
+		};
+	  
+		handleSubmitAsync(); // Invoca la función asincrónica
+	  };
+	  
+	  
 
 	return (
 		<FormProvider {...methods}>
 			<div className="bg-[#F9F6F6] flex flex-col items-center justify-center rounded-xl w-2/3 shadow-md px-20 py-12">
 				<h2 className="text-gray-500">Para registrarte te pediremos algunos datos</h2>
 				<span className="text-gray-600 mb-4">Solo te tomara unos minutos crear tu cuenta</span>
-				<form onSubmit={onSubmit}>
-                    
-					<InputText fieldName="firstname" /* Cambiar name por firstname */ placeholder="Nombre *" type="text" />
+				<form>
+					<InputText
+						fieldName="firstname"
+						/* Cambiar name por firstname */ placeholder="Nombre *"
+						type="text"
+					/>
 					<InputText fieldName="lastname" placeholder="Apellido *" type="text" />
 					<div className="flex w-full">
 						<InputText fieldName="code" placeholder="Codigo Pais *" type="text" styles="w-2/5 mr-4" />

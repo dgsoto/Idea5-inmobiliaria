@@ -15,6 +15,7 @@ const controller: IController = userContainer.resolve('CreateUserController');
 
 router.post('/', CreateUserValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
   /**
+    #swagger.tags = ['Users']
     #swagger.requestBody = {
         required: true,
         schema: { $ref: "#/components/schemas/CreateUserRequest" }

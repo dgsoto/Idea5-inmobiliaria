@@ -14,6 +14,7 @@ const controller: IController = authContainer.resolve('AuthController');
 
 router.post('/login', loginValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
   /**
+    #swagger.tags = ['Authentication']
     #swagger.requestBody = {
         required: true,
         schema: { $ref: "#/components/schemas/LoginRequest" }

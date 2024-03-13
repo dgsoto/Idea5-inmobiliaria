@@ -5,10 +5,14 @@ import { IRoleRepository } from './domain/IRoleRepository';
 import { ExistRoleById } from './domain/services/ExistRoleById';
 import { CreateRoleController } from './infrastructure/api/CreateRoleController';
 import { RoleRepository } from './infrastructure/persistence/RoleRepository';
+import { UpdateRoleUseCase } from './application/update/UpdateRoleUseCase';
+import { UpdateRoleController } from './infrastructure/api/UpdateRoleController';
 
 container.register<IRoleRepository>('RoleRepository', { useClass: RoleRepository });
 container.register('ExistRoleById', { useClass: ExistRoleById });
 container.register('CreateRoleUseCase', { useClass: CreateRoleUseCase });
+container.register('UpdateRoleUseCase', { useClass: UpdateRoleUseCase });
 container.register<IController>('CreateRoleController', { useClass: CreateRoleController });
+container.register<IController>('UpdateRoleController', { useClass: UpdateRoleController });
 
 export { container as roleContainer };

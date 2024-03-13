@@ -38,6 +38,10 @@ const doc = {
         roleName: 'string',
         roleState: 'string',
       },
+      UpdateRoleRequest: {
+        roleName: 'string',
+        roleState: 'string',
+      },
     },
   },
 };

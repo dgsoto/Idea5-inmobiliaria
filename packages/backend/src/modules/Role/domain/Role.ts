@@ -19,6 +19,11 @@ export class Role extends AggregateRoot {
     return new Role(id, roleName, roleStatus);
   }
 
+  async updateFields(roleName: RoleName, roleState: RoleState): Promise<void> {
+    this.roleName = roleName;
+    this.roleState = roleState;
+  }
+
   toPrimitives() {
     throw new Error('Method not implemented.');
   }
