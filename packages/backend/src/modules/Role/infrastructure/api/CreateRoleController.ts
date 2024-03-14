@@ -3,8 +3,9 @@ import { Request, Response, NextFunction } from 'express';
 import { IController } from '../../../Shared/infrastructure/api/IController';
 import httpStatus from 'http-status';
 import { inject, injectable } from 'tsyringe';
-import { CreateRoleUseCase } from '../../application/create/CreateRoleUseCase';
 import { ResponseBase } from '../../../Shared/application/ResponseBase';
+import { IUseCase } from 'src/modules/Shared/application/IUseCase';
+import { ICreateRoleRequest } from '../../application/create/ICreateRoleRequest';
 
 type CreateRoleRequest = Request & {
   body: {
@@ -16,9 +17,9 @@ type CreateRoleRequest = Request & {
 
 @injectable()
 export class CreateRoleController implements IController {
-  private _createRoleUseCase: CreateRoleUseCase;
+  private _createRoleUseCase: IUseCase<ICreateRoleRequest, void>;
 
-  constructor(@inject('CreateRoleUseCase') createRoleUseCase: CreateRoleUseCase) {
+  constructor(@inject('CreateRoleUseCase') createRoleUseCase: IUseCase<ICreateRoleRequest, void>) {
     this._createRoleUseCase = createRoleUseCase;
   }
 

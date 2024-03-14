@@ -3,9 +3,10 @@ import { inject, injectable } from 'tsyringe';
 import { IRoleRepository } from '../../domain/IRoleRepository';
 import { RoleIdNotExistError } from '../../domain/errors/RoleIdNotExistError';
 import { GetRoleByIdResponse } from './GetRoleByIdResponse';
+import { IUseCase } from 'src/modules/Shared/application/IUseCase';
 
 @injectable()
-export class GetRoleByIdUseCase {
+export class GetRoleByIdUseCase implements IUseCase<string, GetRoleByIdResponse> {
   private readonly _repository: IRoleRepository;
 
   constructor(@inject('RoleRepository') repository: IRoleRepository) {

@@ -4,8 +4,8 @@ import { IController } from '../../../Shared/infrastructure/api/IController';
 import httpStatus from 'http-status';
 import { inject, injectable } from 'tsyringe';
 import { ResponseBase } from '../../../Shared/application/ResponseBase';
-import { GetRoleByIdUseCase } from '../../application/getById/GetRoleByIdUseCase';
 import { GetRoleByIdResponse } from '../../application/getById/GetRoleByIdResponse';
+import { IUseCase } from 'src/modules/Shared/application/IUseCase';
 
 type GetRoleByIdRequest = Request & {
   params: {
@@ -15,9 +15,9 @@ type GetRoleByIdRequest = Request & {
 
 @injectable()
 export class GetRoleByIdController implements IController {
-  private _getRoleByIdUseCase: GetRoleByIdUseCase;
+  private _getRoleByIdUseCase: IUseCase<string, GetRoleByIdResponse>;
 
-  constructor(@inject('GetRoleByIdUseCase') getRoleByIdUseCase: GetRoleByIdUseCase) {
+  constructor(@inject('GetRoleByIdUseCase') getRoleByIdUseCase: IUseCase<string, GetRoleByIdResponse>) {
     this._getRoleByIdUseCase = getRoleByIdUseCase;
   }
 

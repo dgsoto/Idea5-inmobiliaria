@@ -3,8 +3,9 @@ import { Request, Response, NextFunction } from 'express';
 import { IController } from '../../../Shared/infrastructure/api/IController';
 import httpStatus from 'http-status';
 import { inject, injectable } from 'tsyringe';
-import { UpdateRoleUseCase } from '../../application/update/UpdateRoleUseCase';
 import { ResponseBase } from '../../../Shared/application/ResponseBase';
+import { IUpdateRoleRequest } from '../../application/update/IUpdateRoleRequest';
+import { IUseCase } from 'src/modules/Shared/application/IUseCase';
 
 type UpdateRoleRequest = Request & {
   params: {
@@ -18,9 +19,9 @@ type UpdateRoleRequest = Request & {
 
 @injectable()
 export class UpdateRoleController implements IController {
-  private _updateRoleUseCase: UpdateRoleUseCase;
+  private _updateRoleUseCase: IUseCase<IUpdateRoleRequest, void>;
 
-  constructor(@inject('UpdateRoleUseCase') updateRoleUseCase: UpdateRoleUseCase) {
+  constructor(@inject('UpdateRoleUseCase') updateRoleUseCase: IUseCase<IUpdateRoleRequest, void>) {
     this._updateRoleUseCase = updateRoleUseCase;
   }
 

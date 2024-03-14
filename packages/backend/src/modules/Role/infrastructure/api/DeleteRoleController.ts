@@ -3,8 +3,8 @@ import { Request, Response, NextFunction } from 'express';
 import { IController } from '../../../Shared/infrastructure/api/IController';
 import httpStatus from 'http-status';
 import { inject, injectable } from 'tsyringe';
-import { DeleteRoleUseCase } from '../../application/delete/DeleteRoleUseCase';
 import { ResponseBase } from '../../../Shared/application/ResponseBase';
+import { IUseCase } from 'src/modules/Shared/application/IUseCase';
 
 type DeleteRoleRequest = Request & {
   params: {
@@ -14,9 +14,9 @@ type DeleteRoleRequest = Request & {
 
 @injectable()
 export class DeleteRoleController implements IController {
-  private _deleteRoleUseCase: DeleteRoleUseCase;
+  private _deleteRoleUseCase: IUseCase<string, void>;
 
-  constructor(@inject('DeleteRoleUseCase') deleteRoleUseCase: DeleteRoleUseCase) {
+  constructor(@inject('DeleteRoleUseCase') deleteRoleUseCase: IUseCase<string, void>) {
     this._deleteRoleUseCase = deleteRoleUseCase;
   }
 

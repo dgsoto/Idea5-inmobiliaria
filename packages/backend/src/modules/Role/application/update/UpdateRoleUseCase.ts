@@ -5,9 +5,10 @@ import { RoleName } from '../../domain/RoleName';
 import { RoleState } from '../../domain/RoleState';
 import { IUpdateRoleRequest } from './IUpdateRoleRequest';
 import { RoleIdNotExistError } from '../../domain/errors/RoleIdNotExistError';
+import { IUseCase } from 'src/modules/Shared/application/IUseCase';
 
 @injectable()
-export class UpdateRoleUseCase {
+export class UpdateRoleUseCase implements IUseCase<IUpdateRoleRequest, void> {
   private readonly _repository: IRoleRepository;
 
   constructor(@inject('RoleRepository') repository: IRoleRepository) {
