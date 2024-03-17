@@ -17,9 +17,6 @@ export class CreateMessageUseCase {
   }
 
   async run(body: ICreateMessageRequest): Promise<void> {
-    //validacion formato de email de la capa de dominio
-    //validacion del rol destinantario
-
     const newMessage = await Message.create(
       new MessageId(body.id),
       body.user_id,
