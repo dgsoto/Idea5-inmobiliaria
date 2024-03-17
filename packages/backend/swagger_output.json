@@ -94,6 +94,17 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
       }
     },
     "/api/roles/{id}": {

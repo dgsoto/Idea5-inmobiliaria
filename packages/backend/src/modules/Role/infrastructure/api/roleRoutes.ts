@@ -17,6 +17,7 @@ const createController: IController = roleContainer.resolve('CreateRoleControlle
 const updateController: IController = roleContainer.resolve('UpdateRoleController');
 const deleteController: IController = roleContainer.resolve('DeleteRoleController');
 const getRoleByIdController: IController = roleContainer.resolve('GetRoleByIdController');
+const getAllRolesController: IController = roleContainer.resolve('GetAllRolesController');
 
 router.post('/', CreateRoleValidator, validateReqSchema, async (req: Request, res: Response, next: NextFunction) => {
   /**
@@ -54,6 +55,14 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     }
      */
   await getRoleByIdController.run(req, res, next);
+});
+
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
+  /**
+    #swagger.tags = ['Roles']
+    }
+     */
+  await getAllRolesController.run(req, res, next);
 });
 
 router.use((err: Error, req: Request, res: Response, next: NextFunction) => {

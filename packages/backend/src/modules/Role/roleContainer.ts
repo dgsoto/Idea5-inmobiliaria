@@ -14,15 +14,20 @@ import { IUseCase } from '../Shared/application/IUseCase';
 import { ICreateRoleRequest } from './application/create/ICreateRoleRequest';
 import { GetRoleByIdResponse } from './application/getById/GetRoleByIdResponse';
 import { IUpdateRoleRequest } from './application/update/IUpdateRoleRequest';
+import { GetAllRolesUseCase } from './application/getAll/GetAllRolesUseCase';
+import { GetAllRolesController } from './infrastructure/api/GetAllRolesController';
+import { GetAllRolesResponse } from './application/getAll/GetAllRolesResponse';
 
 container.register<IRoleRepository>('RoleRepository', { useClass: RoleRepository });
 container.register<IUseCase<ICreateRoleRequest, void>>('CreateRoleUseCase', { useClass: CreateRoleUseCase });
 container.register<IUseCase<IUpdateRoleRequest, void>>('UpdateRoleUseCase', { useClass: UpdateRoleUseCase });
 container.register<IUseCase<string, void>>('DeleteRoleUseCase', { useClass: DeleteRoleUseCase });
 container.register<IUseCase<string, GetRoleByIdResponse>>('GetRoleByIdUseCase', { useClass: GetRoleByIdUseCase });
+container.register<IUseCase<string, GetAllRolesResponse[]>>('GetAllRolesUseCase', { useClass: GetAllRolesUseCase });
 container.register<IController>('CreateRoleController', { useClass: CreateRoleController });
 container.register<IController>('UpdateRoleController', { useClass: UpdateRoleController });
 container.register<IController>('DeleteRoleController', { useClass: DeleteRoleController });
 container.register<IController>('GetRoleByIdController', { useClass: GetRoleByIdController });
+container.register<IController>('GetAllRolesController', { useClass: GetAllRolesController });
 
 export { container as roleContainer };

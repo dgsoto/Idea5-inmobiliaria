@@ -24,7 +24,15 @@ export class Role extends AggregateRoot {
     this.roleState = roleState;
   }
 
-  toPrimitives() {
-    throw new Error('Method not implemented.');
+  toPrimitives(): Record<string, unknown> {
+    return {
+      id: this.id.value,
+      roleName: this.roleName.getValue(),
+      roleState: this.roleState.getValue(),
+    };
+  }
+
+  static fromPrimitives(data: Record<string, unknown>): Role {
+    return new Role(new RoleId(data.id as string), new RoleName(data.roleName as string), new RoleState(data.roleState as string));
   }
 }
