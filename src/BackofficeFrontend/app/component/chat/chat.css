@@ -1,0 +1,40 @@
+.chart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+}
+.buzon{
+    width: 100%;
+}
+.buzon-message {
+    border-bottom: 1px solid rgb(133, 127, 127);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.message {
+    height: 50px;
+    overflow: hidden;
+    padding: 3px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.message:hover {
+    background-color: #bdbcbc;
+}
+.message-avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+}
+.message-body {
+    width: fit-content;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,20 @@
+.ingresos-component{
+    border: 1px solid black;
+    height: fit-content;
+    padding: 1rem;
+}
+.ingresos {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-around;
+    text-align: center;
+   
+}
+.ingresos-card {
+    height: 60px;
+    width: 80px;
+    padding: auto;
+    font-size: 0.7rem;
+    
+}
