@@ -1,0 +1,21 @@
+html {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: white;
+}   
+ul, ol{
+    list-style: none;
+    list-style-type: none;
+    color: white;
+    text-decoration: none;
+}
+.container-extense {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
