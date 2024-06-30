@@ -2,7 +2,7 @@ import  './ingresos.css'
 export default function Ingresos() {
   return (
     
-    <div className="ingresos-component card shadow-lg">
+    <div className="ingresos-component card shadow-lg z-3">
         {/* Ingresar una tabla como metrics */}
         <p className="mt-4 text-center">Ingresos Totales</p>
         <div className="ingresos">

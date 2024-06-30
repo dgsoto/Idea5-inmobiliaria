@@ -2,7 +2,7 @@ import './comuna.css'
 
 export default function Comunas() {
     return (
-      <div className="card shadow-lg">
+      <div className="card shadow-lg z-3">
         <p className="text-center mt-4">Valores por comuna (ARS): Alquileres Definitivos</p>
         <div className="comunas">
           

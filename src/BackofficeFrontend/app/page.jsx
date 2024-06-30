@@ -10,31 +10,33 @@ import Comunas from './component/comuna/Comuna';
 import Reciente from './component/recientes/Reciente';
 import Transacciones from './component/Transacciones/Transacciones';
 import Usuarios from './component/Usuarios/Usuarios';
+import SideBar from './component/sidebar/SideBar';
 
 
 export default function Dashboard() {
     return (
-        
-        <section className="container-fluid dashboard">
-            
+        <div className='d-flex flex-row align-items-center w-100'>
+            <SideBar></SideBar>
+            <section className="container-fluid dashboard">
+
                 <h2>Dashboard</h2>
                 <article className="stats row">
-                   
+
                     <div className="col-6 p-1">
-                    {/* frontend del backoffice */}
+                        {/* frontend del backoffice */}
                         <Zona></Zona>
                     </div>
-                 
+
                     <div className="col-3 p-1">
                         {/* Tasa de conversión de propiedades */}
                         <Taza></Taza>
                     </div>
-                   
+
                     <div className="col-3 p-1">
                         {/* Porcentaje de ocupación */}
                         <Porcentaje></Porcentaje>
                     </div>
-                    
+
                 </article>
 
 
@@ -46,7 +48,7 @@ export default function Dashboard() {
                     </div>
                     <div className="col-3 p-1">
                         {/* Ingresos totales */}
-                        
+
                         <Ingresos></Ingresos>
                     </div>
                     <div className="col-3 p-1">
@@ -74,18 +76,20 @@ export default function Dashboard() {
                         <Chat></Chat>
                     </div>
                     <div className="col-3 p-1 d-flex flex-column align-items-stretch justify-content-stretch">
-                        
-                            {/* Metodos de pagos utilizados */}
-                            <Pagos></Pagos>
-                            {/* Transacciones realizadas */}
-                            <Reciente></Reciente>
-                        
+
+                        {/* Metodos de pagos utilizados */}
+                        <Pagos></Pagos>
+                        {/* Transacciones realizadas */}
+                        <Reciente></Reciente>
+
                     </div>
 
 
                 </article>
-         
 
-        </section>
-        )
+
+            </section>
+        </div>
+
+    )
 }

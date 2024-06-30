@@ -1,8 +1,8 @@
-import './ingresos.css'
+import '../ingresos/Ingresos.css'
 
 export default function Transacciones() {
     return (
-        <div className='ingresos-component card shadow-lg'>
+        <div className='ingresos-component card shadow-lg z-3'>
           <p className='mt-4 text-center'>Total Transacciones realizadas</p>
           {/* Ingresar una tabla */}
           <div className='ingresos'>

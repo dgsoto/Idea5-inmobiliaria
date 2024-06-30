@@ -1,6 +1,6 @@
 export default function Pagos() {
     return (
-      <div className="card shadow-lg">
+      <div className="card shadow-lg z-3">
           <h6 className="mt-4 text-center">Metodos de pago utilizados</h6>
   
           <ul className="text-dark">

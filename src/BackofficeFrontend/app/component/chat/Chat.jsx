@@ -2,7 +2,7 @@ import './chat.css'
 
 export default function Chat() {
     return (
-      <div className=" card shadow-lg h-100">
+      <div className=" card shadow-lg h-100 z-3">
         <h6 className="m-3">Mensajes recientes</h6>
         <div className='chart'>
           <h6 className=''>Sopote Técnico</h6>

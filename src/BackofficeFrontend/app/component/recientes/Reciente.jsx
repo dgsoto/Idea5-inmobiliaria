@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Reciente() {
     return (
-        <div className="card h-100 shadow-lg">
+        <div className="card h-100 shadow-lg z-3">
             <h6 className="mt-4 text-center">Transacciones recientes</h6>
             
                 <table className="recientes-table">

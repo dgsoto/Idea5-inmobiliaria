@@ -1,9 +1,10 @@
 import React from 'react'
 import './taza.css'
 
+
 export default function Taza() {
     return (
-        <div className="card shadow-lg p-4 taza h-100">
+        <div className="card shadow-sm p-4 taza h-100">
           <p className="taza-title">Taza de conversión de propiedades</p>
             
           <div className="taza-body">

@@ -1,8 +1,8 @@
-import '../Transacciones/ingresos.css'
+import '../ingresos/ingresos.css'
 
 export default function Usuarios() {
     return (
-        <div className='ingresos-component card shadow-lg'>
+        <div className='ingresos-component card shadow-lg z-3'>
             <p className="mt-4 text-center">Total Usuarios Activos</p>
             <div className='ingresos'>
             

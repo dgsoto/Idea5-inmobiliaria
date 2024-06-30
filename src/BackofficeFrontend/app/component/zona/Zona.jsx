@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Zona() {
   return (
-    <div className="card shadow-lg p-4 text-center">
+    <div className="card shadow-lg p-4 text-center ">
       <p className="">Ocupación de alquileres por zona</p>
       
         <table>
