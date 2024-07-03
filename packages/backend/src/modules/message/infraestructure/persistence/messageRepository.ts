@@ -4,15 +4,12 @@ import { PrismaClient } from '@prisma/client';
 import { IMessageRepository } from '../../domain/IMessageRepository';
 import { validateAdresseRol } from '../../domain/services/validateAdresseeRol';
 import { InputRolError } from '../../domain/Error/InputRolError';
+import { injectable } from 'tsyringe';
 import { Message } from '../../domain/message';
-import { container, injectable } from 'tsyringe';
-import { typeMessage } from '../../domain/typeMessage';
-import { MessageId } from '../../domain/messageId';
-import { typeSubject } from '../../domain/typeSubject';
-import { UserEmail } from 'src/modules/User/domain/UserEmail';
-import { UserPhone } from 'src/modules/User/domain/UserPhone';
-import { Message } from '../../domain/message';
+import { NotFound } from '../../domain/Error/notFound';
+import { createTypeMessageFromData } from '../../domain/services/messageMapper';
 
+@injectable()
 export class messageRepositoryPrisma implements IMessageRepository {
   constructor(private prisma: PrismaClient) {}
 
@@ -21,7 +18,7 @@ export class messageRepositoryPrisma implements IMessageRepository {
       const remitente = await this.prisma.user.findFirst({ where: { id: newMessage.user_id.toString() } });
       const destinatario = await this.prisma.user.findFirst({ where: { email: newMessage.email.toString() } });
       if (!remitente || !destinatario) {
-        throw new Error('Usuario no autenticado o no encontrado.');
+        throw new NotFound('Usuario');
       }
       const destinatarioRolId = destinatario?.user_type ?? '';
       const remitenteRolId = remitente?.user_type ?? '';
@@ -51,39 +48,121 @@ export class messageRepositoryPrisma implements IMessageRepository {
     try {
       const messageData = await this.prisma.message.findUnique({ where: { id: id } });
 
-      if (!messageData) {
-        throw new Error('El mensaje no fue encontrado');
-      }
-
-      return messageData
-        ? new Message(
-            new MessageId(messageData.id),
-            messageData.user_id,
-            new UserEmail(messageData.email),
-            new UserPhone(messageData.cell_phone),
-            new typeSubject(messageData.subjet),
-            await new typeMessage(messageData?.message, container.resolve('EncryptService')).decryptMessage(),
-          )
-        : null;
+      return messageData ? createTypeMessageFromData(messageData) : null;
     } catch (error) {
-      throw new Error(`Error al leer el mensaje: ${error.message}`);
+      throw error;
     }
   }
 
-  async deleteMessage(id: string): Promise<void> {
+  async deleteMessage(id: string, userEmail: string): Promise<void> {
     try {
       const messageToDelete = await this.prisma.message.findUnique({ where: { id: id } });
-
-      if (!messageToDelete) {
-        throw new Error('El mensaje no fue encontrado');
+      if (userEmail === messageToDelete?.email) {
+        messageToDelete.email = '';
+        await this.prisma.message.update({
+          where: { id: id },
+          data: messageToDelete,
+        });
+      } else {
+        await this.prisma.message.update({
+          where: { id: id },
+          data: {
+            user_id: ' ',
+          },
+        });
       }
-
-      await this.prisma.message.delete({ where: { id: id } });
     } catch (error) {
-      throw new Error(`Error al eliminar el recurso`, error);
+      throw error;
     }
   }
-  /*async replyMessage(content: string): Promise<void> {}
-  async sendMessage(): Promise<void> {}
-  async getMessages(email: string): Promise<message[]> {}*/
+
+  async getMessages(user_id: string, userEmail: string): Promise<Message[] | null> {
+    try {
+      const receivedMessages = await this.getReceivedMessages(userEmail);
+      const sentMessages = await this.getSentMessages(user_id);
+
+      if (!receivedMessages && !sentMessages) {
+        return null;
+      }
+
+      // Combinar los mensajes recibidos y enviados en una lista única
+      const allMessages: Message[] = [];
+      if (sentMessages) {
+        allMessages.push(...sentMessages);
+      }
+
+      if (receivedMessages) {
+        allMessages.push(...receivedMessages);
+      }
+
+      return allMessages;
+    } catch (error) {
+      return [];
+    }
+  }
+  async getReceivedMessages(userEmail: string): Promise<Message[] | null> {
+    try {
+      const messagesData = await this.prisma.message.findMany({ where: { email: userEmail } });
+
+      if (!messagesData) {
+        return null;
+      }
+      const messagesPromises = messagesData.map(async (messageData) => createTypeMessageFromData(messageData));
+      const messages = await Promise.all(messagesPromises);
+      return messages;
+    } catch (error) {
+      throw Error;
+    }
+  }
+
+  async getSentMessages(user_id: string): Promise<Message[] | null> {
+    try {
+      const messagesData = await this.prisma.message.findMany({ where: { user_id: user_id } });
+      if (!messagesData) {
+        return null;
+      }
+
+      const messagesPromises = messagesData.map(async (messageData) => createTypeMessageFromData(messageData));
+      const messages = await Promise.all(messagesPromises);
+      return messages;
+    } catch (error) {
+      throw Error;
+    }
+  }
+
+  async getMessageByEmail(email: string): Promise<Message[] | null> {
+    try {
+      const messagesData = await this.prisma.message.findMany({ where: { email: email } });
+
+      if (!messagesData) {
+        return null;
+      }
+
+      const messagesPromises = messagesData.map(async (messageData) => createTypeMessageFromData(messageData));
+      const messages = await Promise.all(messagesPromises);
+      return messages;
+    } catch (error) {
+      throw Error;
+    }
+  }
+
+  async getMessageByContent(phrase: string): Promise<Message[] | null> {
+    try {
+      const messagesData = await this.prisma.message.findMany({
+        where: {
+          OR: [{ message: { contains: phrase } }, { subjet: { contains: phrase } }],
+        },
+      });
+      if (!messagesData) {
+        return null;
+      }
+      const messagesPromises = messagesData.map(async (messageData) => createTypeMessageFromData(messageData));
+      const messages = await Promise.all(messagesPromises);
+      return messages;
+    } catch (error) {
+      throw Error;
+    }
+  }
+
+  //async replyMessage(): Promise<void> {}
 }

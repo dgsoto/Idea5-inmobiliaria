@@ -24,9 +24,9 @@ export class ReadMessageController implements IController {
       const id = req.body;
       const result = await this._readMessageUseCase.run(id);
 
-      const response = new ResponseBase<void>(true, httpStatus.CREATED, httpStatus[201], undefined, result);
+      const response = new ResponseBase<void>(true, httpStatus.OK, httpStatus[200], undefined, result);
 
-      res.status(httpStatus.CREATED).send(response);
+      res.status(httpStatus.OK).send(response);
     } catch (error) {
       next(error);
     }
